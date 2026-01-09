@@ -16,9 +16,7 @@
                 <div class="slide-content">
                     <h2>{{ slide.title }}</h2>
                     <p>{{ slide.description }}</p>
-                    <button class="cta-button" v-if="slide.buttonText">
-                        {{ slide.buttonText }}
-                    </button>
+                    <moreButton :label="slide.buttonText"/>
                 </div>
             </div>
             
@@ -46,6 +44,11 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
+import heroImage_1 from '../../assets/pic/pexels-ekaterina-bolovtsova-6077381.jpg';
+import heroImage_2 from '../../assets/pic/pexels-matreding-12953639.jpg';
+import heroImage_3 from '../../assets/pic/pexels-roboseal34-35457179.jpg';
+import heroImage_4 from '../../assets/pic/pexels-vizualproduction-11205891.jpg'
+import moreButton from '../button/moreButton.vue';
 
 interface Slide {
     image: string;
@@ -56,30 +59,33 @@ interface Slide {
 
 export default defineComponent({
     name: 'HeroCarousel',
+    components: {
+        moreButton
+    },
     setup() {
         const slides = ref<Slide[]>([
             {
-                image: '\src\assets\pic\pexels-ekaterina-bolovtsova-6077381.jpg',
-                title: 'Bienvenu au pays mon fils le bostwanga t\'attendait',
-                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt animi assumenda aut.',
+                image: heroImage_2,
+                title: 'Bienvenue chez ADN Consulting SAS',
+                description: 'un cabinet juridique innovant dédié à accompagner les PME, startups et entrepreneurs indépendants.',
                 buttonText: 'Découvrir'
             },
             {
-                image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-                title: 'Une aventure inoubliable',
-                description: 'Explorez des paysages à couper le souffle et vivez des expériences uniques.',
+                image: heroImage_1,
+                title: 'Nous Aidons les Organisations à se Sécurisez Juridiquement',
+                description: 'Notre expertise couvre le droit des affaires, la propriété intellectuelle et le droit du numérique, afin de répondre efficacement à vos besoins spécifiques.',
                 buttonText: 'Explorer'
             },
             {
-                image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-                title: 'Traditions et cultures',
+                image: heroImage_3,
+                title: 'Solutions juridiques digitales',
                 description: 'Plongez au cœur des traditions ancestrales et des cultures authentiques.',
                 buttonText: 'En savoir plus'
             },
             {
-                image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-                title: 'Nature préservée',
-                description: 'Découvrez une nature intacte et des écosystèmes préservés.',
+                image: heroImage_4,
+                title: 'Expertise légale',
+                description: 'Le Cabinet ADN Consulting SAS intègre des technologies légales innovantes pour optimiser vos processus juridiques et gagner en efficacité.',
                 buttonText: 'Visiter'
             }
         ]);
@@ -224,28 +230,9 @@ export default defineComponent({
 .slide-content p {
     color: white;
     font-size: 1.125rem;
+    font-weight: 600;
     margin-bottom: 2rem;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-.cta-button {
-    background: #FF6B35;
-    color: white;
-    border: none;
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.cta-button:hover {
-    background: #FF8B35;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
 }
 
 .carousel-indicators {
@@ -340,11 +327,6 @@ export default defineComponent({
 @media (min-width: 768px) {
     .slide-content h2 {
         font-size: 3rem;
-    }
-    
-    .cta-button {
-        padding: 1rem 2.5rem;
-        font-size: 1.125rem;
     }
     
     .carousel-btn.prev {

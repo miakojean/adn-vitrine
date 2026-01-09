@@ -31,7 +31,6 @@
                     :class="['category-btn', { active: activeCategory === category.id }]"
                     @click="setActiveCategory(category.id)"
                 >
-                    <span class="category-icon">{{ category.icon }}</span>
                     <span class="category-text">{{ category.name }}</span>
                     <span class="category-count">{{ category.count }}</span>
                 </button>
@@ -165,11 +164,7 @@
 
             <!-- Bouton CTA -->
             <div class="team-cta" :class="{ 'animated': showContent }">
-                <button class="join-team-btn" @click="scrollToContact">
-                    <span class="btn-icon">🚀</span>
-                    <span class="btn-text">Rejoindre notre équipe</span>
-                    <span class="btn-subtext">Postes disponibles</span>
-                </button>
+                <moreButton label="Rejoindre notre équipe" />
             </div>
         </div>
 
@@ -266,6 +261,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, reactive } from 'vue';
+import moreButton from '../button/moreButton.vue';
 
 // Types
 interface TeamMember {

@@ -1,6 +1,6 @@
 <template>
     <button class="cta-button" @click="handleCtaClick">
-        <span>Découvrir notre portfolio</span>
+        <span> {{ label }}</span>
         <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -10,6 +10,13 @@
 <script lang="ts">
 export default {
     name: 'moreButton',
+
+    props: {
+        label:{
+            type: String,
+            default: 'Découvrir notre portfolio',
+        }
+    },
 
     setup() {
         const handleCtaClick = () => {
@@ -24,7 +31,7 @@ export default {
 </script>
 
 <style scoped>
-    .cta-button {
+.cta-button {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
