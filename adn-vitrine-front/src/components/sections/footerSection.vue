@@ -9,10 +9,10 @@
                             <rect width="32" height="32" rx="6" fill="#3B82F6"/>
                             <path d="M10 16L14 20L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        <span class="brand-name">Nexus</span>
+                        <span class="brand-name">ADN Consuting sas</span>
                     </div>
                     <p class="brand-description">
-                        Créateurs d'expériences digitales exceptionnelles.
+                        Sécurisez juridiquement votre business.
                     </p>
                 </div>
 
@@ -21,9 +21,9 @@
                     <div class="links-group">
                         <h3 class="links-title">Services</h3>
                         <ul class="links-list">
-                            <li><a href="#services" class="footer-link">Développement Web</a></li>
-                            <li><a href="#services" class="footer-link">Design UI/UX</a></li>
-                            <li><a href="#services" class="footer-link">Applications Mobile</a></li>
+                            <li><a href="#services" class="footer-link">Création et protection d'entreprises</a></li>
+                            <li><a href="#services" class="footer-link">Suivi et accompagnement juridique</a></li>
+                            <li><a href="#services" class="footer-link">Conformité et ressources humaines</a></li>
                         </ul>
                     </div>
                     
@@ -39,9 +39,9 @@
                     <div class="links-group">
                         <h3 class="links-title">Contact</h3>
                         <ul class="links-list">
-                            <li><a href="mailto:contact@nexus.com" class="footer-link">contact@nexus.com</a></li>
-                            <li><a href="tel:+33123456789" class="footer-link">+33 1 23 45 67 89</a></li>
-                            <li class="footer-link">Paris, France</li>
+                            <li><a href="mailto:contact@adnconsulting.com" class="footer-link">contact@adnconsulting.com</a></li>
+                            <li><a href="tel:+2250123456789" class="footer-link">+225 01 23 45 67 89</a></li>
+                            <li class="footer-link">Abidjan, Côte d'Ivoire</li>
                         </ul>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
             <!-- Bottom Section -->
             <div class="footer-bottom">
                 <div class="copyright">
-                    © {{ new Date().getFullYear() }} Nexus. Tous droits réservés.
+                    © {{ new Date().getFullYear() }} Adn consulting sas. Tous droits réservés.
                 </div>
                 <div class="legal-links">
                     <a href="/legal" class="legal-link">Mentions légales</a>

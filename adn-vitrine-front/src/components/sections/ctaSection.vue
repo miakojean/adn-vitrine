@@ -14,7 +14,20 @@
                 
                 <!-- Contenu textuel -->
                 <div class="slide-content">
-                    <h2>{{ slide.title }}</h2>
+                    <!-- Titre avec effet lettre par lettre -->
+                    <h2 ref="titleRefs">
+                        <span 
+                            v-for="(char, charIndex) in slide.title" 
+                            :key="charIndex"
+                            class="title-char"
+                            :style="{
+                                animationDelay: `${charIndex * 0.05}s`,
+                                opacity: currentSlide === index ? 1 : 0
+                            }"
+                        >
+                            {{ char === ' ' ? '&nbsp;' : char }}
+                        </span>
+                    </h2>
                     <p>{{ slide.description }}</p>
                     <moreButton :label="slide.buttonText"/>
                 </div>
@@ -43,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
+import { defineComponent, ref, onMounted, onUnmounted, watch, nextTick } from 'vue';
 import heroImage_1 from '../../assets/pic/pexels-ekaterina-bolovtsova-6077381.jpg';
 import heroImage_2 from '../../assets/pic/pexels-matreding-12953639.jpg';
 import heroImage_3 from '../../assets/pic/pexels-roboseal34-35457179.jpg';
@@ -93,21 +106,48 @@ export default defineComponent({
         const currentSlide = ref(0);
         const interval = ref<number | null>(null);
         const autoPlayDelay = 5000; // 5 secondes
+        const titleRefs = ref<HTMLElement[]>([]);
+
+        // Fonction pour réinitialiser l'animation des lettres
+        const resetTitleAnimation = () => {
+            // Réinitialiser l'opacité de toutes les lettres
+            const allChars = document.querySelectorAll('.title-char');
+            allChars.forEach(char => {
+                (char as HTMLElement).style.opacity = '0';
+                (char as HTMLElement).style.animation = 'none';
+            });
+            
+            // Forcer un reflow pour redémarrer l'animation
+            void nextTick(() => {
+                const activeChars = titleRefs.value[currentSlide.value]?.querySelectorAll('.title-char');
+                if (activeChars) {
+                    activeChars.forEach((char: Element, index: number) => {
+                        const htmlChar = char as HTMLElement;
+                        htmlChar.style.opacity = '1';
+                        htmlChar.style.animation = `typing 0.5s ease forwards`;
+                        htmlChar.style.animationDelay = `${index * 0.05}s`;
+                    });
+                }
+            });
+        };
 
         // Fonction pour passer au slide suivant
         const nextSlide = () => {
             currentSlide.value = (currentSlide.value + 1) % slides.value.length;
+            resetTitleAnimation();
         };
 
         // Fonction pour passer au slide précédent
         const prevSlide = () => {
             currentSlide.value = (currentSlide.value - 1 + slides.value.length) % slides.value.length;
+            resetTitleAnimation();
         };
 
         // Fonction pour aller à un slide spécifique
         const goToSlide = (index: number) => {
             currentSlide.value = index;
             resetAutoPlay();
+            resetTitleAnimation();
         };
 
         // Démarrer le défilement automatique
@@ -139,6 +179,15 @@ export default defineComponent({
         // Initialiser le carrousel
         onMounted(() => {
             startAutoPlay();
+            // Lancer l'animation pour le premier slide
+            setTimeout(() => {
+                resetTitleAnimation();
+            }, 100);
+        });
+
+        // Observer les changements de slide
+        watch(currentSlide, () => {
+            resetTitleAnimation();
         });
 
         // Nettoyer à la destruction du composant
@@ -151,6 +200,7 @@ export default defineComponent({
         return {
             slides,
             currentSlide,
+            titleRefs,
             nextSlide,
             prevSlide,
             goToSlide,
@@ -215,8 +265,7 @@ export default defineComponent({
     z-index: 2;
     text-align: center;
     padding: 1rem;
-    max-width: 800px;
-    animation: fadeInUp 0.8s ease-out;
+    max-width: 900px;
 }
 
 .slide-content h2 {
@@ -225,6 +274,31 @@ export default defineComponent({
     font-weight: 700;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    /*overflow: hidden;*/
+}
+
+/* Conteneur pour les lettres */
+.title-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: typing 0.5s ease forwards;
+}
+
+/* Animation lettre par lettre */
+@keyframes typing {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .slide-content p {
@@ -233,6 +307,7 @@ export default defineComponent({
     font-weight: 600;
     margin-bottom: 2rem;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 0.8s ease-out 0.5s both;
 }
 
 .carousel-indicators {

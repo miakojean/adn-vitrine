@@ -14,7 +14,7 @@ export default {
     props: {
         label:{
             type: String,
-            default: 'Découvrir notre portfolio',
+            default: 'Nous contacter',
         }
     },
 
@@ -35,7 +35,7 @@ export default {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 1rem 2.5rem;
+    padding: 1rem;
     background: linear-gradient(90deg, #3b82f6, #8b5cf6);
     color: white;
     border: none;
