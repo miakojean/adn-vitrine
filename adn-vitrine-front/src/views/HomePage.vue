@@ -16,7 +16,7 @@ import ctaSection from '../components/sections/ctaSection.vue';
 import statSection from '../components/sections/statSection.vue';
 import teamSection from '../components/sections/teamSection.vue';
 import patnerSection from '../components/sections/patnerSection.vue';
-import servicesSection from '../components/sections/servicesSection.vue';
+import servicesSection from '../components/sections/serviceSection.vue';
 import footerSection from '../components/sections/footerSection.vue';
 
 export default {

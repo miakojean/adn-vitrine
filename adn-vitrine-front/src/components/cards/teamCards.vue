@@ -5,12 +5,12 @@
         </div>
         <div class="team__info">
             <h3>
-                John Doe
+                {{ name }}
             </h3>
-            <p>Developer</p>
+            <p>{{ role }}</p>
 
             <div class="about">
-                <span> About John Doe</span>
+                <span> About {{ name }}</span>
                 <p>
                     Lorem ipsum dolor sit 
                     amet consectetur adipisicing 
@@ -28,7 +28,29 @@
     </article>
 </template>
 
-<script></script>
+<script>
+import { type } from 'os';
+
+export default {
+    name: 'teamCards',
+
+    props:{
+        name:{
+            type: String,
+            default: 'John Doe',
+
+        },
+        role:{
+            type: String,
+            default: 'Developer',
+        },
+    },
+
+    setup(){
+
+    }
+};
+</script>
 
 <style scoped>
 

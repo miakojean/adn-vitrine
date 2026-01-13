@@ -7,14 +7,16 @@
       <div class="header-content">
         <span class="badge">NOS SERVICES</span>
         <h2 class="title">
-          Créons l'exceptionnel <br />
-          <span class="highlight">ensemble</span>
+          Garantissons ensemble votre <br />
+          <span class="highlight">sécurité</span>
         </h2>
         <p class="subtitle">
           Nous concevons des expériences digitales qui allient esthétique minimaliste
           et performance technique de pointe.
         </p>
       </div>
+
+      <!-- On va améliorer cette section -->
 
       <div class="cards-grid">
         <div 
@@ -60,27 +62,29 @@
 </template>
 
 <script setup lang="ts">
+import mainButton from '../button/mainButton.vue';
+
 const services = [
   {
-    title: "UI/UX Design",
-    description: "Interfaces centrées utilisateur qui convertissent vos visiteurs en clients fidèles.",
+    title: "Création et la protection d'entreprise",
+    description: "Des solutions sur mesure pour lancer et sécuriser votre entreprise.",
     theme: "theme-purple",
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>`,
-    features: ["Maquettes Figma", "Prototypage", "Design System"]
+    features: ["Constitution d'entreprises", "Dissolution d'entreprises", "Design System"]
   },
   {
-    title: "Développement Web",
-    description: "Applications robustes et véloces construites avec les dernières technologies.",
+    title: "Suivi et accompagnement juridique",
+    description: "Au cas où vous disposeriez d'une entreprise, nous vous accompagnons dans la gestion de vos obligations juridiques.",
     theme: "theme-blue",
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>`,
-    features: ["Vue.js / React", "API REST & GraphQL", "Optimisation SEO"]
+    features: ["Rédaction de contrats", "Gestion des litiges", "Conformité réglementaire"]
   },
   {
-    title: "Brand Strategy",
-    description: "Une identité de marque forte pour vous démarquer dans un marché saturé.",
+    title: "La conformité et ressources humaines",
+    description: "Nous vous aidons à respecter les normes légales et à gérer vos ressources humaines.",
     theme: "theme-pink",
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>`,
-    features: ["Identité Visuelle", "Positionnement", "Social Media"]
+    features: ["Audit de conformité", "Formation en droit du travail", "Gestion des ressources humaines"]
   }
 ];
 </script>
