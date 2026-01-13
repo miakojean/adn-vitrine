@@ -7,12 +7,11 @@
     <!-- Menu desktop -->
     <div class="nav__menu">
         <ul class="nav__links">
-            <li><a href="#home" class="nav__link ">Accueil</a></li>
-            <li><a href="#about" class="nav__link active">À propos</a></li>
-            <li><a href="#services" class="nav__link">Services</a></li>
-            <li><a href="#blog" class="nav__link">Blog</a></li>
-            <li><a href="#newsletter" class="nav__link">Newsletter</a></li>
-
+            <li><router-link to="/" class="nav__link" exact-active-class="active">Accueil</router-link></li>
+            <li><router-link to="/about" class="nav__link" active-class="active">À propos</router-link></li>
+            <li><router-link to="/services" class="nav__link" active-class="active">Services</router-link></li>
+            <li><router-link to="/blog" class="nav__link" active-class="active">Blog</router-link></li>
+            <li><router-link to="/newsletter" class="nav__link" active-class="active">Newsletter</router-link></li>
         </ul>
     </div>
 
@@ -27,6 +26,20 @@
         <span></span>
     </button>
     
+    <!-- Menu mobile (version router) -->
+    <div class="nav__menu mobile" :class="{ 'active': isMenuOpen }">
+        <ul class="nav__links">
+            <li><router-link to="/" class="nav__link" exact-active-class="active" @click="closeMenu">Accueil</router-link></li>
+            <li><router-link to="/about" class="nav__link" active-class="active" @click="closeMenu">À propos</router-link></li>
+            <li><router-link to="/services" class="nav__link" active-class="active" @click="closeMenu">Services</router-link></li>
+            <li><router-link to="/blog" class="nav__link" active-class="active" @click="closeMenu">Blog</router-link></li>
+            <li><router-link to="/newsletter" class="nav__link" active-class="active" @click="closeMenu">Newsletter</router-link></li>
+        </ul>
+        <div class="nav__cta">
+            <mainButton />
+        </div>
+    </div>
+    
     <!-- Overlay mobile -->
     <div class="nav__overlay" :class="{ 'active': isMenuOpen }" @click="closeMenu"></div>
 </nav>
@@ -34,16 +47,16 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
-import navButton from './navButton.vue';
 import mainButton from '../button/mainButton.vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
     name: 'navbar',
     components: {
-        navButton,
         mainButton
     },
     setup() {
+        const router = useRouter();
         const isScrolled = ref(false);
         const isMenuOpen = ref(false);
         
@@ -53,7 +66,6 @@ export default defineComponent({
         
         const toggleMenu = () => {
             isMenuOpen.value = !isMenuOpen.value;
-            // Empêcher le défilement quand le menu est ouvert
             if (isMenuOpen.value) {
                 document.body.style.overflow = 'hidden';
             } else {
@@ -66,8 +78,9 @@ export default defineComponent({
             document.body.style.overflow = '';
         };
         
-        // Fermer le menu quand on clique sur un lien
-        const handleLinkClick = () => {
+        // Navigation programmatique
+        const navigateTo = (route: string) => {
+            router.push(route);
             closeMenu();
         };
         
@@ -81,14 +94,6 @@ export default defineComponent({
         onMounted(() => {
             window.addEventListener('scroll', handleScroll);
             window.addEventListener('keydown', handleEscape);
-            
-            // Ajouter les écouteurs d'événements aux liens
-            setTimeout(() => {
-                const links = document.querySelectorAll('.nav__link');
-                links.forEach(link => {
-                    link.addEventListener('click', handleLinkClick);
-                });
-            }, 100);
         });
         
         onUnmounted(() => {
@@ -98,10 +103,12 @@ export default defineComponent({
         });
         
         return {
+            router,
             isScrolled,
             isMenuOpen,
             toggleMenu,
-            closeMenu
+            closeMenu,
+            navigateTo
         };
     }
 });
@@ -126,7 +133,6 @@ export default defineComponent({
 }
 
 .main__nav.nav--scrolled {
-    background: none;
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     height: 65px;
@@ -140,9 +146,9 @@ export default defineComponent({
     transition: color 0.3s ease;
     text-transform: uppercase;
 }
-
+ 
 .nav--scrolled .nav__logo h3 {
-    color: white;
+    color: #eee;
 }
 
 /* Menu desktop - caché sur mobile */
@@ -223,7 +229,7 @@ export default defineComponent({
     overflow-y: auto;
 }
 
-.nav--menu-open .nav__menu.mobile {
+.nav__menu.mobile.active {
     right: 0;
 }
 
@@ -231,20 +237,29 @@ export default defineComponent({
     flex-direction: column;
     gap: 0;
     margin-bottom: 40px;
+    list-style: none;
+    padding: 0;
 }
 
 .nav__menu.mobile .nav__link {
-    color: white;
+    color: #eee;
     font-size: 18px;
     padding: 15px 0;
     border-bottom: 1px solid #eee;
     display: block;
     text-align: left;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav__menu.mobile .nav__link:hover {
+    color: #0066cc;
 }
 
 .nav__menu.mobile .nav__link.active {
     color: #0066cc;
     border-bottom-color: #0066cc;
+    font-weight: 600;
 }
 
 .nav__menu.mobile .nav__cta {
@@ -255,6 +270,33 @@ export default defineComponent({
 .cta__button {
     display: none;
 }
+
+/* Styles pour les liens router */
+.nav__link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav__link.router-link-exact-active,
+.nav__link.router-link-active {
+    color: #0066cc;
+}
+
+.nav__link.router-link-exact-active::after,
+.nav__link.router-link-active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #0066cc;
+    border-radius: 2px;
+}
+
 /* Responsive pour tablette et desktop */
 @media (min-width: 768px) {
     .main__nav {
@@ -270,13 +312,15 @@ export default defineComponent({
         font-size: 24px;
     }
     
-    /* Cacher le hamburger */
-    .nav__hamburger {
+    /* Cacher le hamburger et menu mobile */
+    .nav__hamburger,
+    .nav__menu.mobile,
+    .nav__overlay {
         display: none;
     }
     
     /* Afficher le menu desktop */
-    .nav__menu {
+    .nav__menu:not(.mobile) {
         display: flex;
         align-items: center;
         gap: 40px;
@@ -292,12 +336,8 @@ export default defineComponent({
     
     .nav__link {
         color: white;
-        text-decoration: none;
         font-size: 16px;
         font-weight: 500;
-        transition: color 0.3s ease;
-        position: relative;
-        padding: 5px 0;
     }
     
     .nav--scrolled .nav__link {
@@ -323,8 +363,8 @@ export default defineComponent({
         border-radius: 2px;
     }
     
-    .nav__cta {
-        margin-left: 10px;
+    .cta__button {
+        display: block;
     }
 }
 
@@ -333,7 +373,7 @@ export default defineComponent({
         padding: 0 50px;
     }
     
-    .nav__menu {
+    .nav__menu:not(.mobile) {
         gap: 50px;
     }
     
@@ -367,6 +407,7 @@ export default defineComponent({
 .nav__menu.mobile .nav__link:nth-child(2) { animation-delay: 0.2s; }
 .nav__menu.mobile .nav__link:nth-child(3) { animation-delay: 0.3s; }
 .nav__menu.mobile .nav__link:nth-child(4) { animation-delay: 0.4s; }
+.nav__menu.mobile .nav__link:nth-child(5) { animation-delay: 0.5s; }
 
 /* Smooth scroll behavior */
 html {

@@ -20,7 +20,8 @@ export default {
 
     setup() {
         const handleCtaClick = () => {
-        window.location.href = '/portfolio';
+            console.log('CTA clicked');
+            // Naviguer vers la page de contact
         };
 
         return {

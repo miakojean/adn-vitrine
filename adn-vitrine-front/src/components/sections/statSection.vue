@@ -54,6 +54,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, reactive} from 'vue';
 import moreButton from '../button/moreButton.vue';
+import { useRouter } from 'vue-router';
 
 // Animation des nombres
 interface AnimatedStat {
@@ -68,28 +69,30 @@ interface AnimatedStat {
 
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
+const router = useRouter();
+
 // Données des statistiques
 const stats = reactive<AnimatedStat[]>([
     {
-        value: 100,
+        value: 1000,
         hasPlus: true,
-        title: "Projets Réalisés",
-        description: "Solutions innovantes déployées avec succès",
+        title: "Entreprises Accompagnées",
+        description: "Partenariats solides à travers le monde",
         tag: "En croissance",
         animated: false,
         displayValue: 0
     },
     {
-        value: 50,
+        value: 1700,
         hasPlus: true,
-        title: "Clients Satisfaits",
-        description: "Taux de satisfaction de 98%",
-        tag: "Relation durable",
+        title: "Documents Rédigés",
+        description: "Solutions juridiques sur mesure",
+        tag: "Professionnalisme",
         animated: false,
         displayValue: 0
     },
     {
-        value: 10,
+        value: 8,
         hasPlus: false,
         title: "Années d'Expérience",
         description: "Expertise accumulée depuis 2014",
@@ -133,8 +136,7 @@ let observerInstance: IntersectionObserver | null = null;
 
 // CTA
 const handleCtaClick = () => {
-    console.log('CTA clicked');
-    // Naviguer vers le portfolio
+    router.push('/about');
 };
 
 // Créer des particules animées
