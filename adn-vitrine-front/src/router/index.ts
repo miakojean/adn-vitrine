@@ -21,7 +21,7 @@ const router = createRouter({
     {
       path: '/blog',
       name: 'blog',
-      component: () => import('../views/ServicePage.vue')
+      component: () => import('../views/BlogPage.vue')
     },
     {
       path: '/newsletter',

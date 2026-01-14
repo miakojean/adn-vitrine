@@ -3,7 +3,6 @@
     <div class="newsletter__container">
       <div class="newsletter__content">
         <h3 class="newsletter__title">
-          Gardons les liens <br />
           Soyez au courant <br />
           des dernières nouveautés.
         </h3>
@@ -24,7 +23,6 @@
             <mainButton 
               type="submit" 
               label="S'abonner" 
-              class="form__button"
             />
           </div>
         </form>
@@ -61,7 +59,7 @@ const handleSubmit = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6rem 2rem;
+  padding: 6rem 2rem 1rem 2rem;
   overflow: hidden;
   color:#f8fafc;
 }

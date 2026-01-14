@@ -79,19 +79,19 @@ export default defineComponent({
         const slides = ref<Slide[]>([
             {
                 image: heroImage_2,
-                title: 'Bienvenue chez ADN Consulting SAS',
+                title: 'Bienvenue chez ADN Consulting SAS.',
                 description: 'un cabinet juridique innovant dédié à accompagner les PME, startups et entrepreneurs indépendants.',
                 buttonText: 'Découvrir'
             },
             {
                 image: heroImage_1,
-                title: 'Nous Aidons les Organisations à se Sécurisez Juridiquement',
+                title: 'Nous Aidons les Organisations à se Sécuriser Juridiquement.',
                 description: 'Notre expertise couvre le droit des affaires, la propriété intellectuelle et le droit du numérique, afin de répondre efficacement à vos besoins spécifiques.',
                 buttonText: 'Explorer'
             },
             {
                 image: heroImage_3,
-                title: 'Solutions juridiques digitales',
+                title: 'Solutions juridiques digitales.',
                 description: 'Plongez au cœur des traditions ancestrales et des cultures authentiques.',
                 buttonText: 'En savoir plus'
             },

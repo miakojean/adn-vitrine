@@ -28,8 +28,7 @@
     </article>
 </template>
 
-<script>
-import { type } from 'os';
+<script lang="ts">
 
 export default {
     name: 'teamCards',
