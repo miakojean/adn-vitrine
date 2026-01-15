@@ -273,7 +273,7 @@ export default defineComponent({
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.502);
     display: inline-block;
     /*overflow: hidden;*/
 }
