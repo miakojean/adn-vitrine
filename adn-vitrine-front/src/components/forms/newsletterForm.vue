@@ -1,18 +1,18 @@
 <template>
-    <form class="newsletter__form" @submit.prevent="handleSubmit">
-        <div class="form__group">
-        <input 
-            type="email" 
-            class="form__input" 
-            placeholder="email@exemple.com" 
-            required
-        />
-        <mainButton 
-            type="submit" 
-            label="S'abonner" 
-        />
-        </div>
-    </form>
+  <form class="newsletter__form" @submit.prevent="handleSubmit">
+    <div class="form__group">
+    <input 
+      type="email" 
+      class="form__input" 
+      placeholder="email@exemple.com" 
+      required
+    />
+    <mainButton 
+      type="submit" 
+      label="S'abonner" 
+    />
+    </div>
+  </form>
 </template>
 
 <script lang="ts">
@@ -22,11 +22,11 @@ export default {
     name: 'NewsletterForm',
     components: { mainButton },
     setup() {
-        const handleSubmit = () => {
-            console.log("Formulaire envoyé");
-        };
+      const handleSubmit = () => {
+        console.log("Formulaire envoyé");
+      };
 
-        return { handleSubmit };
+      return { handleSubmit };
     }
 }
 </script>
