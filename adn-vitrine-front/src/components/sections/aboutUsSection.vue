@@ -106,7 +106,7 @@ export default defineComponent({
 <style scoped>
 .about__section {
     width: 100%;
-    padding: 8rem 2rem;
+    padding: 8rem 2rem 1rem 2rem;
     background-color: #0f172a; /* Fond sombre profond pour le contraste */
     display: flex;
     flex-direction: column;

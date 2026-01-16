@@ -97,7 +97,7 @@ const services = [
 .services-section {
   position: relative;
   background-color: #0f172a; /* Dark slate background */
-  padding: 6rem 1.5rem;
+  padding: 6rem 1.5rem 1rem 1.5rem;
   overflow: hidden;
   color: #f8fafc;
   min-height: 100vh;

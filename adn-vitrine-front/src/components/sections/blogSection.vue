@@ -1,7 +1,7 @@
 <template>
     <section class="blog-section">
         <!-- Hero Header -->
-         <div class="blog-hero">
+        <div class="blog-hero">
             <div class="blog-hero__content">
                 <h1 class="blog-hero__title">
                     Design Resources, Interviews, and Industry News
@@ -245,18 +245,26 @@ export default defineComponent({
 /* Hero Section */
 .blog-hero {
     max-width: 1200px;
+    min-height: 100vh;
     margin: 0 auto 4rem;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 4rem;
-    padding: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
     border-bottom: 1px solid var(--color-border);
 }
 
+.blog-hero__cta {
+    width: 100%;
+}
+
+
 @media (min-width: 1024px) {
     .blog-hero {
+        display: grid;
         grid-template-columns: 2fr 1fr;
-        gap: 6rem;
+        gap: 1rem;
     }
 }
 

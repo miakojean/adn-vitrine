@@ -30,7 +30,8 @@ export default {
 
 <style scoped>
 .cta-button {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     align-items: center;
     gap: 0.75rem;
     padding: 1rem;

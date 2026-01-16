@@ -219,7 +219,7 @@ export default defineComponent({
     width: 80%;
     max-width: 350px;
     height: 100vh;
-    background: white;
+    background: #0F172A;
     padding: 80px 30px 40px;
     box-sizing: border-box;
     transition: right 0.4s ease;
