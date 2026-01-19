@@ -22,19 +22,7 @@
                     Découvrez les experts qui transforment vos idées en réalité.
                 </p>
             </div>
-
-            <!-- Navigation des catégories -->
-            <div class="team-categories" :class="{ 'animated': showContent }">
-                <button 
-                    v-for="category in categories" 
-                    :key="category.id"
-                    :class="['category-btn', { active: activeCategory === category.id }]"
-                    @click="setActiveCategory(category.id)"
-                >
-                    <span class="category-text">{{ category.name }}</span>
-                    <span class="category-count">{{ category.count }}</span>
-                </button>
-            </div>
+            
 
             <!-- Grille des membres -->
             <div class="team-grid">
@@ -64,107 +52,31 @@
                                     <div class="photo-shine"></div>
                                 </div>
                                 
-                                <!-- État en ligne -->
-                                <div 
-                                    class="online-status" 
-                                    :class="{ online: member.online }"
-                                ></div>
                             </div>
 
                             <!-- Informations du membre -->
                             <div class="member-info">
                                 <h3 class="member-name">{{ member.name }}</h3>
                                 <p class="member-role">{{ member.role }}</p>
-                                
-                                <!-- Tags de compétences -->
-                                <div class="member-tags">
-                                    <span 
-                                        v-for="tag in member.tags.slice(0, 3)" 
-                                        :key="tag"
-                                        class="tag"
-                                    >
-                                        {{ tag }}
-                                    </span>
-                                    <span 
-                                        v-if="member.tags.length > 3" 
-                                        class="tag more"
-                                    >
-                                        +{{ member.tags.length - 3 }}
-                                    </span>
-                                </div>
 
                                 <!-- Bio courte -->
                                 <p class="member-bio">
                                     {{ truncateText(member.bio, 100) }}
                                 </p>
                             </div>
-
-                            <!-- Footer de la carte -->
-                            <div class="card-footer">
-                                <!-- Social links -->
-                                <div class="social-links">
-                                    <a 
-                                        v-for="social in member.social" 
-                                        :key="social.platform"
-                                        :href="social.url" 
-                                        class="social-link"
-                                        @click.stop
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        :aria-label="`${member.name} sur ${social.platform}`"
-                                    >
-                                        <span class="social-icon">{{ social.icon }}</span>
-                                    </a>
-                                </div>
-
-                                <!-- Bouton d'action -->
-                                <button 
-                                    class="view-profile-btn"
-                                    @click.stop="() => openModal(member)"
-                                >
-                                    <span>Voir le profil</span>
-                                    <svg class="arrow" width="16" height="16" viewBox="0 0 24 24">
-                                        <path d="M5 12H19M19 12L12 5M19 12L12 19" 
-                                              stroke="currentColor" 
-                                              stroke-width="2" 
-                                              stroke-linecap="round" 
-                                              stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                            </div>
+                            
 
                             <!-- Effet de halo -->
                             <div class="card-halo"></div>
                         </div>
-
-                        <!-- Carte arrière (au hover) -->
-                        <div class="card-back">
-                            <div class="back-content">
-                                <h4>Expertise</h4>
-                                <ul class="expertise-list">
-                                    <li v-for="expertise in member.expertise" :key="expertise">
-                                        {{ expertise }}
-                                    </li>
-                                </ul>
-                                <div class="stats">
-                                    <div class="stat">
-                                        <span class="stat-value">{{ member.projects }}</span>
-                                        <span class="stat-label">Projets</span>
-                                    </div>
-                                    <div class="stat">
-                                        <span class="stat-value">{{ member.experience }} ans</span>
-                                        <span class="stat-label">Expérience</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </transition-group>
             </div>
 
             <!-- Bouton CTA -->
             <div class="team-cta" :class="{ 'animated': showContent }">
-                <moreButton label="Rejoindre notre équipe" />
+                <moreButton label="Toute l'équipe" />
             </div>
         </div>
 
@@ -200,20 +112,6 @@
                             <div class="detail-section">
                                 <h4>Biographie</h4>
                                 <p>{{ selectedMember.fullBio }}</p>
-                            </div>
-
-                            <div class="detail-section">
-                                <h4>Expertises</h4>
-                                <div class="expertise-grid">
-                                    <div 
-                                        v-for="expertise in selectedMember.expertise" 
-                                        :key="expertise"
-                                        class="expertise-item"
-                                    >
-                                        <span class="expertise-dot"></span>
-                                        <span>{{ expertise }}</span>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="detail-section">
@@ -303,21 +201,12 @@ const activeCategory = ref('all');
 const selectedMember = ref<TeamMember | null>(null);
 const imageLoaded = reactive<Record<number, boolean>>({});
 
-// Catégories
-const categories: Category[] = [
-    { id: 'all', name: 'Toute l\'équipe', icon: '👥', count: 12 },
-    { id: 'dev', name: 'Développement', icon: '💻', count: 5 },
-    { id: 'design', name: 'Design', icon: '🎨', count: 3 },
-    { id: 'marketing', name: 'Marketing', icon: '📈', count: 2 },
-    { id: 'management', name: 'Management', icon: '👔', count: 2 }
-];
-
 // Données des membres
 const teamMembers: TeamMember[] = [
     {
         id: 1,
-        name: 'Alexandre Dubois',
-        role: 'Lead Développeur Full-Stack',
+        name: 'Ange Désirée NIOULE',
+        role: 'Founder & CEO',
         department: 'Développement',
         photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
         bio: 'Expert en architectures cloud et solutions évolutives.',
@@ -340,9 +229,9 @@ const teamMembers: TeamMember[] = [
     },
     {
         id: 2,
-        name: 'Sophie Martin',
-        role: 'Directrice Artistique',
-        department: 'Design',
+        name: 'Emlice PKANDJO',
+        role: 'Directrice juridique',
+        department: 'Juridique',
         photo: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop',
         bio: 'Spécialiste en design d\'interface et expérience utilisateur.',
         fullBio: 'Sophie combine une expertise en design d\'interface avec une approche centrée sur l\'utilisateur. Elle dirige une équipe de designers talentueux pour créer des expériences digitales mémorables et fonctionnelles.',
@@ -364,9 +253,9 @@ const teamMembers: TeamMember[] = [
     },
     {
         id: 3,
-        name: 'Thomas Lambert',
-        role: 'Développeur Frontend',
-        department: 'Développement',
+        name: 'Rushdan BACHABI',
+        role: 'Directeur de l\'innovation',
+        department: 'Innovation',
         photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w-400&h=400&fit=crop',
         bio: 'Passionné par Vue.js et les animations web modernes.',
         fullBio: 'Thomas est spécialisé dans le développement frontend avec Vue.js. Il adore créer des interfaces interactives et performantes, en mettant l\'accent sur les animations fluides et l\'expérience utilisateur.',
@@ -386,78 +275,7 @@ const teamMembers: TeamMember[] = [
         online: false,
         category: ['dev']
     },
-    {
-        id: 4,
-        name: 'Emma Chen',
-        role: 'Chef de Projet Digital',
-        department: 'Management',
-        photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
-        bio: 'Experte en gestion agile et coordination d\'équipes.',
-        fullBio: 'Emma excelle dans la gestion de projets digitaux complexes. Elle utilise des méthodologies agiles pour garantir la livraison dans les délais et le respect des budgets, tout en maintenant une communication transparente avec les clients.',
-        tags: ['Agile', 'Scrum', 'Jira', 'Gestion'],
-        expertise: ['Gestion de Projet', 'Méthodologies Agile', 'Planification', 'Communication'],
-        social: [
-            { platform: 'LinkedIn', url: '#', icon: '💼' },
-            { platform: 'Twitter', url: '#', icon: '🐦' },
-            { platform: 'Medium', url: '#', icon: '📝' }
-        ],
-        email: 'emma@entreprise.com',
-        phone: '+33 1 23 45 67 92',
-        projects: 56,
-        experience: 6,
-        clients: 34,
-        awards: 3,
-        online: true,
-        category: ['management']
-    },
-    {
-        id: 5,
-        name: 'Karim Alami',
-        role: 'Expert DevOps',
-        department: 'Développement',
-        photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
-        bio: 'Spécialiste en automatisation et infrastructure cloud.',
-        fullBio: 'Karim est un expert DevOps passionné par l\'automatisation et l\'optimisation des processus de développement. Il met en place des infrastructures robustes et sécurisées pour assurer la scalabilité des applications.',
-        tags: ['Kubernetes', 'Docker', 'AWS', 'CI/CD'],
-        expertise: ['Infrastructure Cloud', 'Automatisation', 'Sécurité', 'Monitoring'],
-        social: [
-            { platform: 'GitHub', url: '#', icon: '💻' },
-            { platform: 'LinkedIn', url: '#', icon: '💼' },
-            { platform: 'Dev.to', url: '#', icon: '👨‍💻' }
-        ],
-        email: 'karim@entreprise.com',
-        phone: '+33 1 23 45 67 93',
-        projects: 31,
-        experience: 7,
-        clients: 22,
-        awards: 4,
-        online: true,
-        category: ['dev']
-    },
-    {
-        id: 6,
-        name: 'Léa Petit',
-        role: 'Designer UX/UI',
-        department: 'Design',
-        photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop',
-        bio: 'Focus sur la recherche utilisateur et les tests d\'utilisabilité.',
-        fullBio: 'Léa est spécialisée en recherche utilisateur et design d\'interaction. Elle combine des méthodes qualitatives et quantitatives pour créer des interfaces intuitives et accessibles à tous les utilisateurs.',
-        tags: ['User Research', 'Wireframing', 'Testing', 'Accessibility'],
-        expertise: ['Recherche Utilisateur', 'Tests Utilisabilité', 'Prototypage', 'Design Accessible'],
-        social: [
-            { platform: 'Behance', url: '#', icon: '🎨' },
-            { platform: 'LinkedIn', url: '#', icon: '💼' },
-            { platform: 'Twitter', url: '#', icon: '🐦' }
-        ],
-        email: 'lea@entreprise.com',
-        phone: '+33 1 23 45 67 94',
-        projects: 29,
-        experience: 5,
-        clients: 21,
-        awards: 3,
-        online: false,
-        category: ['design']
-    }
+    
 ];
 
 // Computed
@@ -469,11 +287,6 @@ const filteredMembers = computed(() => {
         member.category.includes(activeCategory.value)
     );
 });
-
-// Méthodes
-const setActiveCategory = (categoryId: string) => {
-    activeCategory.value = categoryId;
-};
 
 const hoverCard = (memberId: number) => {
     const card = document.querySelector(`.team-card[data-member="${memberId}"]`);
@@ -506,11 +319,6 @@ const truncateText = (text: string, maxLength: number) => {
 
 const imageLoad = (memberId: number) => {
     imageLoaded[memberId] = true;
-};
-
-const scrollToContact = () => {
-    // Implémentez la navigation vers la section contact
-    console.log('Navigation vers contact');
 };
 
 // Intersection Observer
@@ -697,11 +505,6 @@ onUnmounted(() => {
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
 }
 
-.team-categories.animated {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .category-btn {
     display: flex;
     align-items: center;
@@ -717,26 +520,6 @@ onUnmounted(() => {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-}
-
-.category-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.6s ease;
-}
-
-.category-btn:hover::before {
-    left: 100%;
-}
-
-.category-btn:hover {
-    border-color: rgba(59, 130, 246, 0.3);
-    transform: translateY(-2px);
 }
 
 .category-btn.active {
@@ -809,23 +592,6 @@ onUnmounted(() => {
     flex-direction: column;
     padding: 2rem;
     z-index: 2;
-}
-
-.team-card:hover .card-inner {
-    transform: rotateY(180deg);
-}
-
-.card-back {
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    transform: rotateY(180deg);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.team-card:hover .card-back {
-    transform: rotateY(0deg);
 }
 
 /* Photo */
@@ -983,12 +749,6 @@ onUnmounted(() => {
     transition: all 0.3s ease;
 }
 
-.social-link:hover {
-    background: rgba(59, 130, 246, 0.2);
-    color: #3b82f6;
-    transform: translateY(-2px);
-}
-
 .view-profile-btn {
     display: flex;
     align-items: center;
@@ -1002,11 +762,6 @@ onUnmounted(() => {
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-.view-profile-btn:hover {
-    background: rgba(59, 130, 246, 0.1);
-    transform: translateX(4px);
 }
 
 /* Carte arrière */

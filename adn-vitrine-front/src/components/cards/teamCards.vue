@@ -9,16 +9,6 @@
             </h3>
             <p>{{ role }}</p>
 
-            <div class="about">
-                <span> About {{ name }}</span>
-                <p>
-                    Lorem ipsum dolor sit 
-                    amet consectetur adipisicing 
-                    elit. Esse explicabo pariatur 
-                    iure illum dolore qui.
-                </p>
-            </div>
-
             <div class="social__icons">
                 <i class="ri-linkedin-fill"></i>
                 <i class="ri-twitter-x-line"></i>
@@ -59,7 +49,6 @@ export default {
     min-width: 300px;
     background-color: #0F172A;
     border-radius: 0.5rem;
-    padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -78,6 +67,7 @@ export default {
     align-items: start;
     gap: 0.5rem;
     color: white;
+    padding: 1rem;
 }
 
 .team__info h3 {

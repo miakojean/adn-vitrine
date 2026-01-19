@@ -92,7 +92,7 @@ const stats = reactive<AnimatedStat[]>([
         displayValue: 0
     },
     {
-        value: 8,
+        value: 9,
         hasPlus: false,
         title: "Années d'Expérience",
         description: "Expertise accumulée depuis 2014",

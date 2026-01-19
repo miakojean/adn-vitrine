@@ -4,18 +4,18 @@
         <div class="blog-hero">
             <div class="blog-hero__content">
                 <h1 class="blog-hero__title">
-                    Design Resources, Interviews, and Industry News
+                    Découvrez nos derniers articles de blog.
                 </h1>
                 <p class="blog-hero__subtitle">
-                    Stay updated with the latest insights, trends, and innovations in design and technology.
+                    Restez informé des dernières idées, tendances et innovations au sein du cabinet ADN consulting.
                 </p>
             </div>
             
             <div class="blog-hero__cta">
                 <div class="cta-content">
-                    <h3 class="cta-title">Join our community</h3>
+                    <h3 class="cta-title">Rejoignez notre communauté</h3>
                     <p class="cta-description">
-                        Subscribe to learn about new product features, the latest in technology, solutions, and updates.
+                        Abonnez-vous pour découvrir les nouvelles fonctionnalités produits, les dernières technologies, solutions et mises à jour.
                     </p>
                     <div class="cta-form">
                         <newsletterForm />

@@ -18,7 +18,7 @@
                 les PMEs et startups voient leurs intérêts grandement 
                 protégés et grandissent sainement.
             </p>
-            <mainButton label="Nos services" type="button" class="mt-4"/>
+            <mainButton label="Nos services" type="button" class="mt-4" @click="() => router.push('/services')"/>
         </div>
 
         <div class="about__statistic flex flex-col justify-center items-center mt-16 gap-8 w-full">
@@ -46,28 +46,44 @@
             </div>
 
             <div class="carousel__wrapper">
-                <button class="nav-btn prev" @click="scrollPrev" aria-label="Précédent">
+                <button class="nav-btn prev" @click="scrollPrev" aria-label="Précédent" :disabled="currentIndex === 0">
                     <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
                 </button>
 
-                <div class="carousel__container" ref="carouselRef">
-                    <teamCards v-for="n in 6" :key="n" class="carousel__item" />
+                <div class="carousel__container" ref="carouselRef" @scroll="handleScroll">
+                    <teamCards 
+                        v-for="(member, index) in teamMembers" 
+                        :key="member.name" 
+                        class="carousel__item" 
+                        :name="member.name" 
+                        :role="member.role"
+                        :class="{ 'active': index === currentIndex }"
+                    />
                 </div>
 
-                <button class="nav-btn next" @click="scrollNext" aria-label="Suivant">
+                <button class="nav-btn next" @click="scrollNext" aria-label="Suivant" :disabled="currentIndex >= teamMembers.length - itemsPerView">
                     <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
                 </button>
             </div>
             
             <div class="carousel__indicators">
-                <div class="indicator-bar"></div>
+                <div class="indicator-track">
+                    <div 
+                        class="indicator-bar" 
+                        :style="{
+                            width: `${indicatorWidth}%`,
+                            transform: `translateX(${indicatorPosition}%)`
+                        }"
+                    ></div>
+                </div>
             </div>
         </div>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed, onMounted, onUnmounted } from 'vue';
+import { useRouter } from 'vue-router';
 import mainButton from '../button/mainButton.vue';
 import divider from '../tools/divider.vue';
 import teamCards from '../cards/teamCards.vue';
@@ -76,7 +92,13 @@ export default defineComponent({
     name: 'AboutUsSection',
     components: { mainButton, divider, teamCards },
     setup() {
+        const router = useRouter();
         const carouselRef = ref<HTMLElement | null>(null);
+        const currentIndex = ref(0);
+        const itemsPerView = ref(1);
+        const maxVisibleSlides = ref(3);
+        const scrollDebounce = ref<NodeJS.Timeout | null>(null);
+        
         const statistics = [
             { number: '1000+', label: 'Entreprises accompagnées' },
             { number: '1700+', label: 'Documents rédigés' },
@@ -86,19 +108,160 @@ export default defineComponent({
             { number: '1', label: 'Legaltech' }
         ];
 
+        // Calcul des slides visibles
+        const visibleDots = computed(() => {
+            return Math.ceil(teamMembers.value.length / itemsPerView.value);
+        });
+
+        // Calcul de la largeur de l'indicateur
+        const indicatorWidth = computed(() => {
+            return 100 / visibleDots.value;
+        });
+
+        // Calcul de la position de l'indicateur
+        const indicatorPosition = computed(() => {
+            const slideGroup = Math.floor(currentIndex.value / itemsPerView.value);
+            return slideGroup * 100;
+        });
+
         const scrollNext = () => {
             if (carouselRef.value) {
-                carouselRef.value.scrollBy({ left: 350, behavior: 'smooth' });
+                const scrollAmount = carouselRef.value.clientWidth;
+                carouselRef.value.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                updateCurrentIndex();
             }
         };
 
         const scrollPrev = () => {
             if (carouselRef.value) {
-                carouselRef.value.scrollBy({ left: -350, behavior: 'smooth' });
+                const scrollAmount = -carouselRef.value.clientWidth;
+                carouselRef.value.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                updateCurrentIndex();
             }
         };
 
-        return { statistics, carouselRef, scrollNext, scrollPrev };
+        const goToSlide = (slideIndex: number) => {
+            if (carouselRef.value) {
+                const scrollAmount = slideIndex * carouselRef.value.clientWidth;
+                carouselRef.value.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+                currentIndex.value = slideIndex * itemsPerView.value;
+            }
+        };
+
+        const handleScroll = () => {
+            if (scrollDebounce.value) {
+                clearTimeout(scrollDebounce.value);
+            }
+            
+            scrollDebounce.value = setTimeout(() => {
+                updateCurrentIndex();
+            }, 100);
+        };
+
+        const updateCurrentIndex = () => {
+            if (!carouselRef.value) return;
+            
+            const scrollLeft = carouselRef.value.scrollLeft;
+            const cardWidth = carouselRef.value.scrollWidth / teamMembers.value.length;
+            const newIndex = Math.round(scrollLeft / cardWidth);
+            
+            // Limiter l'index aux bornes
+            currentIndex.value = Math.max(0, Math.min(newIndex, teamMembers.value.length - itemsPerView.value));
+        };
+
+        const updateItemsPerView = () => {
+            const width = window.innerWidth;
+            
+            if (width >= 1024) {
+                itemsPerView.value = 3;
+            } else if (width >= 768) {
+                itemsPerView.value = 2;
+            } else {
+                itemsPerView.value = 1;
+            }
+        };
+
+        // About team 
+        const teamMembers = ref([
+            {
+                name: 'Ange Désiré NIOULE',
+                role: 'fondatrice & CEO',
+                bio: 'Alice possède plus de 10 ans d\'expérience dans le conseil aux entreprises en matière de conformité réglementaire et de contrats commerciaux.'
+            },
+            {
+                name: 'Emlice KPANDJO',
+                role: 'Directrice juridique',
+                bio: 'Marc est un expert en solutions technologiques pour le secteur juridique, aidant les cabinets à optimiser leurs processus grâce à l\'innovation.'
+            },
+            {
+                name: 'Rushdan BACHABI',
+                role: 'Directeur des innovations',
+                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
+            },
+            {
+                name: 'Tosseta DOH',
+                role: 'Legal Marketing Officer',
+                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
+            },
+            {
+                name: 'Josué KOFFI',
+                role: 'Legal Sell',
+                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
+            },
+            {
+                name: 'Nathanael NESSON',
+                role: 'Graphiste Designer',
+                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
+            },
+            {
+                name: 'Malaro DJANE',
+                role: 'Assistante Administrative et Executive',
+                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
+            },
+            {
+                name: 'Grâce NIOULE',
+                role: 'Community Manager',
+                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
+            },
+            {
+                name: 'Jean Yves MIAKO',
+                role: 'Développeur full stack',
+                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
+            }
+        ]);
+
+        // Lifecycle
+        onMounted(() => {
+            updateItemsPerView();
+            window.addEventListener('resize', updateItemsPerView);
+            
+            // Auto-scroll pour démonstration (optionnel)
+            // const autoScroll = setInterval(scrollNext, 5000);
+            // onUnmounted(() => clearInterval(autoScroll));
+        });
+
+        onUnmounted(() => {
+            window.removeEventListener('resize', updateItemsPerView);
+            if (scrollDebounce.value) {
+                clearTimeout(scrollDebounce.value);
+            }
+        });
+
+        return { 
+            router, 
+            statistics, 
+            carouselRef, 
+            currentIndex,
+            itemsPerView,
+            visibleDots,
+            indicatorWidth,
+            indicatorPosition,
+            scrollNext, 
+            scrollPrev,
+            handleScroll,
+            goToSlide,
+            teamMembers 
+        };
     }
 });
 </script>
@@ -107,7 +270,7 @@ export default defineComponent({
 .about__section {
     width: 100%;
     padding: 8rem 2rem 1rem 2rem;
-    background-color: #0f172a; /* Fond sombre profond pour le contraste */
+    background-color: #0f172a;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -199,7 +362,7 @@ export default defineComponent({
 /* --- Carrousel Logic --- */
 .carousel__wrapper {
     position: relative;
-    width: 100vw; /* Bord à bord sur mobile */
+    width: 100vw;
     max-width: 1200px;
     padding: 0 20px;
 }
@@ -209,22 +372,29 @@ export default defineComponent({
     gap: 24px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
     padding: 20px 0;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
 }
 
 .carousel__container::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+    display: none;
 }
 
 .carousel__item {
-    flex: 0 0 85%; /* Mobile peek-a-boo */
+    flex: 0 0 calc(85% - 12px);
     scroll-snap-align: center;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.7;
 }
 
-/* Navigation Arrows (Cachées sur mobile) */
+.carousel__item.active {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+/* Navigation Arrows */
 .nav-btn {
     position: absolute;
     top: 50%;
@@ -244,38 +414,134 @@ export default defineComponent({
     transition: all 0.3s ease;
 }
 
-.nav-btn:hover { background: #2563eb; transform: translateY(-50%) scale(1.1); }
+.nav-btn:hover:not(:disabled) { 
+    background: #2563eb; 
+    transform: translateY(-50%) scale(1.1); 
+}
+
+.nav-btn:disabled {
+    background: #64748b;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
 .nav-btn.prev { left: -25px; }
 .nav-btn.next { right: -25px; }
 
+/* Indicateurs dynamiques */
+.carousel__indicators {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.indicator-track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.indicator-bar {
+    position: absolute;
+    height: 100%;
+    background: #3b82f6;
+    border-radius: 2px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.indicator-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.indicator-dot:hover {
+    background: rgba(59, 130, 246, 0.5);
+    transform: scale(1.2);
+}
+
+.indicator-dot.active {
+    background: #3b82f6;
+    transform: scale(1.2);
+}
+
+.indicator-dot.active::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 1px solid #3b82f6;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 0.3; }
+}
+
+/* Accessibilité */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* Responsive Desktop */
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     .carousel__item {
-        flex: 0 0 calc(33.333% - 16px);
-        scroll-snap-align: start;
+        flex: 0 0 calc(50% - 12px);
     }
+    
     .nav-btn {
         display: flex;
     }
+}
+
+@media (min-width: 1024px) {
+    .carousel__item {
+        flex: 0 0 calc(33.333% - 16px);
+    }
+    
     .carousel__wrapper {
         overflow: visible;
     }
 }
 
-/* Indicateur de scroll minimaliste pour mobile */
-.carousel__indicators {
-    width: 100px;
-    height: 4px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 2px;
-    position: relative;
-    margin-top: 10px;
-}
-
-.indicator-bar {
-    width: 40%;
-    height: 100%;
-    background: #3b82f6;
-    border-radius: 2px;
+/* Animation pour le défilement fluide */
+@media (prefers-reduced-motion: reduce) {
+    .carousel__container,
+    .carousel__item,
+    .indicator-bar,
+    .indicator-dot {
+        transition: none;
+    }
 }
 </style>
