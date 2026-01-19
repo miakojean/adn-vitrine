@@ -144,7 +144,6 @@ export default defineComponent({
     font-weight: 700;
     letter-spacing: 0.5px;
     transition: color 0.3s ease;
-    text-transform: uppercase;
 }
  
 .nav--scrolled .nav__logo h3 {

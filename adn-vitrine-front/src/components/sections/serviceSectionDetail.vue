@@ -30,7 +30,9 @@
           >
             <div class="accordion-header-content">
               <div class="accordion-icon">
-                <component :is="service.iconComponent" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
+                </svg>
               </div>
               <h3 class="accordion-title">{{ service.title }}</h3>
             </div>
@@ -76,64 +78,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineComponent, h } from 'vue';
+import { ref } from 'vue';
 import mainButton from '../button/mainButton.vue';
 
 // Composants SVG définis proprement
-const CreateIcon = defineComponent({
-  render() {
-    return h('svg', {
-      width: '24',
-      height: '24',
-      viewBox: '0 0 24 24',
-      fill: 'none',
-      stroke: 'currentColor',
-      'stroke-width': '2',
-      'stroke-linecap': 'round',
-      'stroke-linejoin': 'round'
-    }, [
-      h('path', { d: 'M12 19l7-7 3 3-7 7-3-3z' }),
-      h('path', { d: 'M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z' }),
-      h('path', { d: 'M2 2l7.586 7.586' }),
-      h('circle', { cx: '11', cy: '11', r: '2' })
-    ]);
-  }
-});
 
-const FollowIcon = defineComponent({
-  render() {
-    return h('svg', {
-      width: '24',
-      height: '24',
-      viewBox: '0 0 24 24',
-      fill: 'none',
-      stroke: 'currentColor',
-      'stroke-width': '2',
-      'stroke-linecap': 'round',
-      'stroke-linejoin': 'round'
-    }, [
-      h('polyline', { points: '16 18 22 12 16 6' }),
-      h('polyline', { points: '8 6 2 12 8 18' })
-    ]);
-  }
-});
-
-const ComplianceIcon = defineComponent({
-  render() {
-    return h('svg', {
-      width: '24',
-      height: '24',
-      viewBox: '0 0 24 24',
-      fill: 'none',
-      stroke: 'currentColor',
-      'stroke-width': '2',
-      'stroke-linecap': 'round',
-      'stroke-linejoin': 'round'
-    }, [
-      h('path', { d: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5' })
-    ]);
-  }
-});
 
 const activeAccordion = ref<number | null>(0);
 
@@ -146,21 +95,18 @@ const services = [
     title: "Création et la protection d'entreprise",
     description: "Des solutions sur mesure pour lancer et sécuriser votre entreprise.",
     theme: "theme-purple",
-    iconComponent: CreateIcon,
     features: ["Constitution d'entreprises", "Dissolution d'entreprises", "Design System"]
   },
   {
     title: "Suivi et accompagnement juridique",
     description: "Au cas où vous disposeriez d'une entreprise, nous vous accompagnons dans la gestion de vos obligations juridiques.",
     theme: "theme-blue",
-    iconComponent: FollowIcon,
     features: ["Rédaction de contrats", "Gestion des litiges", "Conformité réglementaire"]
   },
   {
     title: "La conformité et ressources humaines",
     description: "Nous vous aidons à respecter les normes légales et à gérer vos ressources humaines.",
     theme: "theme-pink",
-    iconComponent: ComplianceIcon,
     features: ["Audit de conformité", "Formation en droit du travail", "Gestion des ressources humaines"]
   }
 ];
