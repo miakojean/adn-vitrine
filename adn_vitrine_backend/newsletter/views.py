@@ -7,6 +7,8 @@ from django.shortcuts import get_object_or_404
 from .models import Subscriber, Newsletter, Campaign
 from .serializers import SubscriberSerializer, NewsletterSerializer, CampaignSerializer
 
+from .utils import send_welcome_email
+
 # Create your views here.
 class SubscriberListCreateView(APIView):
     """Liste tous les abonnés et crée un nouvel abonné."""
@@ -28,6 +30,14 @@ class SubscriberListCreateView(APIView):
         serializer = SubscriberSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            # Envoyer un email de bienvenue
+            try:
+                send_welcome_email(
+                    subscriber_email=serializer.data['email'],
+                    subscriber_name=serializer.data['first_name']
+                )
+            except Exception as e:
+                print(f"Erreur lors de l'envoi de l'email de bienvenue: {e}")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

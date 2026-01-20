@@ -1,6 +1,7 @@
 <template>
     <button class="cta-button" @click="handleCtaClick">
-        <span> {{ label }}</span>
+        <span v-if="isLoading===false"> {{ label }}</span>
+        <span v-if="isLoading" class="loading loading-spinner loading-md"></span>
     </button>
 </template>
 
@@ -12,6 +13,10 @@ export default {
         label:{
             type: String,
             default: 'Nous contacter',
+        },
+        isLoading:{
+            type: Boolean,
+            default: false,
         }
     },
 

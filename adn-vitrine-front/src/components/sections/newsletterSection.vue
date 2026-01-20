@@ -1,31 +1,18 @@
 <template>
   <section class="newsletter">
     <div class="newsletter__container">
+      
       <div class="newsletter__content">
         <h3 class="newsletter__title">
           Soyez au courant <br />
           des dernières nouveautés.
         </h3>
-        
         <p class="newsletter__description">
-          Bienvenue sur notre hub de newsletter, où nous vous apportons les dernières 
-          actualités, du contenu exclusif, et des aperçus des coulisses.
+          Abonnez-vous à notre newsletter pour recevoir les dernières mises à jour,
+          des conseils exclusifs et des offres spéciales directement dans votre boîte
+          de réception.
         </p>
-
-        <form class="newsletter__form" @submit.prevent="handleSubmit">
-          <div class="form__group">
-            <input 
-              type="email" 
-              class="form__input" 
-              placeholder="email@exemple.com" 
-              required
-            />
-            <mainButton 
-              type="submit" 
-              label="S'abonner" 
-            />
-          </div>
-        </form>
+        <newsletterForm />
       </div>
 
       <div class="newsletter__visual">
@@ -43,11 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import mainButton from '../button/mainButton.vue';
-
-const handleSubmit = () => {
-  console.log("Formulaire envoyé");
-};
+import newsletterForm from '../forms/newsletterForm.vue';
 </script>
 
 <style scoped>
@@ -84,7 +67,7 @@ const handleSubmit = () => {
 }
 
 .newsletter__description {
-  color: var(--text-dim);
+  color: #94A3B8;
   font-size: 1.15rem;
   line-height: 1.6;
   max-width: 500px;

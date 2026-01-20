@@ -17,9 +17,7 @@
                     <p class="cta-description">
                         Abonnez-vous pour découvrir les nouvelles fonctionnalités produits, les dernières technologies, solutions et mises à jour.
                     </p>
-                    <div class="cta-form">
-                        <newsletterForm />
-                    </div>
+                    <newsletterForm />
                 </div>
             </div>
         </div>
@@ -250,8 +248,8 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
-    padding: 2rem 0;
+    gap: 1rem;
+    padding: 4rem 0;
     border-bottom: 1px solid var(--color-border);
 }
 
@@ -303,7 +301,7 @@ export default defineComponent({
 .cta-content {
     background: var(--color-surface);
     border-radius: var(--radius-lg);
-    padding: 2rem;
+    padding: 1rem;
     border: 1px solid var(--color-border);
 }
 
