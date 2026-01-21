@@ -1,41 +1,53 @@
 <template>
-  <form class="newsletter__form" @submit.prevent="handleSubmit">
-    <inputFamily 
-      v-model="payload.firstName"
-      type="text"
-      name="votre prenom"
-      label="Votre prenom" 
-      placeholder="Entrer votre prenom" 
-    />
-    <inputFamily 
-      v-model="payload.email"
-      type="email" 
-      name="votre email"
-      label="Votre email" 
-      placeholder="Entrer votre adresse email" 
-    />
-    <div class="error__fields">
-      <p>
-        {{ errorMessage }}
-      </p>
-    </div>
-    <mainButton 
-      type="submit" 
-      label="S'abonner"
-      :is-loading="isLoading"
-    />
-  </form>
+  <div class="">
+    <form v-if="!isSuccess" class="newsletter__form" @submit.prevent="handleSubmit">
+      <inputFamily 
+        v-model="payload.firstName"
+        type="text"
+        name="votre prenom"
+        label="Votre prenom" 
+        placeholder="Entrer votre prenom" 
+      />
+      <inputFamily 
+        v-model="payload.email"
+        type="email" 
+        name="votre email"
+        label="Votre email" 
+        placeholder="Entrer votre adresse email" 
+      />
+      <div class="error__fields">
+        <p>
+          {{ errorMessage }}
+        </p>
+      </div>
+      <mainButton 
+        type="submit" 
+        label="S'abonner"
+        :is-loading="isLoading"
+      />
+    </form>
+
+    <transition name="fade-transition">
+      <div class="succes__container" v-if="isSuccess">
+        <succesCheck :size="80" />
+        <h3 class=" text-2xl font-bold">
+          Abonnement réussi ! Merci de vous être abonné à notre newsletter.
+        </h3>
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script lang="ts">
 import mainButton from '../button/mainButton.vue';
 import inputFamily from '../input/inputFamily.vue';
+import succesCheck from '../tools/succesCheck.vue';
 import { apiClient } from '../../services/api';
 import { reactive, ref } from 'vue';
 
 export default {
     name: 'NewsletterForm',
-    components: { mainButton, inputFamily },
+    components: { mainButton, inputFamily, succesCheck },
     setup() {
       
       // Gestion des etats
@@ -45,6 +57,7 @@ export default {
         firstName: '',
         email: '',
       })
+      const isSuccess = ref(false);
       
       const handleSubmit = async() => {
 
@@ -60,7 +73,8 @@ export default {
         try {
           const response = await apiClient.post('/newsletter/subscribers/', payload);
           isLoading.value = false;
-          console.log("Formulaire envoyé", response.data);
+          isSuccess.value = true;
+          console.log('Abonnement réussi:', response.data);
         } catch (error) {
           isLoading.value = false;
           console.error('Erreur lors de l\'abonnement à la newsletter:', error);
@@ -69,7 +83,7 @@ export default {
         
       };
 
-      return { isLoading,errorMessage, handleSubmit, payload };
+      return { isLoading, errorMessage, handleSubmit, payload, isSuccess };
     }
 }
 </script>
@@ -82,6 +96,7 @@ export default {
   max-width: 500px;
   display: flex;
   flex-direction: column;
+  justify-content: start;
   gap: 1rem;
   padding: 2rem 1rem;
   background: #1E293B;

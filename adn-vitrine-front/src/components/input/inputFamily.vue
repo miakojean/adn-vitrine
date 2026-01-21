@@ -92,5 +92,6 @@ input{
 }
 label{
     font-weight: 600;
+    text-align: left;
 }
 </style>

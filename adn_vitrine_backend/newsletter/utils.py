@@ -10,13 +10,10 @@ def send_welcome_email(subscriber_email, subscriber_name):
     # Version HTML
     html_message = render_to_string('newsletter/welcome_email.html', {'name': subscriber_name})
     
-    # Version texte (ESSENTIEL)
-    text_message = render_to_string('newsletter/welcome_email.txt', {'name': subscriber_name})
-    
     try:
         send_mail(
             subject=subject,
-            message=text_message,  # Version texte obligatoire
+            message='Bienvenue dans la newsletter d\'ADN Consulting',  # Version texte obligatoire
             from_email=from_email,
             recipient_list=to_email,
             html_message=html_message,

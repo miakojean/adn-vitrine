@@ -16,7 +16,7 @@
     </div>
 
     <div class="cta__button">
-        <mainButton />
+        <mainButton label="Besoin d'un contrat"/>
     </div>
     
     <!-- Menu mobile -->

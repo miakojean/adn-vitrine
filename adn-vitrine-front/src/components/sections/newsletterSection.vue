@@ -36,7 +36,6 @@ import newsletterForm from '../forms/newsletterForm.vue';
 <style scoped>
 /* Variables de design */
 .newsletter {
-  
   min-height: 100vh;
   background-color: #0F172A;
   display: flex;
