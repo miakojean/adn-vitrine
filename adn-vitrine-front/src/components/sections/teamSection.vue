@@ -76,7 +76,7 @@
 
             <!-- Bouton CTA -->
             <div class="team-cta" :class="{ 'animated': showContent }">
-                <moreButton label="Toute l'équipe" />
+                <moreButton label="Toute l'équipe" @click="()=> router.push('/about')"/>
             </div>
         </div>
 
@@ -160,6 +160,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, reactive } from 'vue';
 import moreButton from '../button/moreButton.vue';
+import { useRouter } from 'vue-router';
 
 // Types
 interface TeamMember {
@@ -200,6 +201,9 @@ const showContent = ref(false);
 const activeCategory = ref('all');
 const selectedMember = ref<TeamMember | null>(null);
 const imageLoaded = reactive<Record<number, boolean>>({});
+
+// Router
+const router = useRouter();
 
 // Données des membres
 const teamMembers: TeamMember[] = [

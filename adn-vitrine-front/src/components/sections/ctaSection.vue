@@ -92,7 +92,7 @@ export default defineComponent({
             {
                 image: heroImage_3,
                 title: 'Solutions juridiques digitales.',
-                description: 'Plongez au cœur des traditions ancestrales et des cultures authentiques.',
+                description: 'Plongez au cœur de l\'innovation juridique.',
                 buttonText: 'En savoir plus'
             },
             {
@@ -265,7 +265,7 @@ export default defineComponent({
     z-index: 2;
     text-align: center;
     padding: 1rem;
-    max-width: 900px;
+    max-width: 1000px;
 }
 
 .slide-content h2 {

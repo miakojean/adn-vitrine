@@ -47,7 +47,7 @@ import { reactive, ref } from 'vue';
 
 export default {
     name: 'NewsletterForm',
-    components: { mainButton, inputFamily, succesCheck },
+    components: { mainButton, inputFamily, succesCheck},
     setup() {
       
       // Gestion des etats

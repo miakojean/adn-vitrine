@@ -8,9 +8,9 @@
 
         <div class="container">
             <div class="section-header" :class="{ 'animated': showContent }">
-                <span class="section-label">ÉCOSYSTÈME</span>
+                <span class="section-label">Partenariats stratégiques</span>
                 <h2 class="section-title">
-                    Technologies & <span class="highlight">Partenaires</span>
+                    Nos différents <span class="highlight">Partenaires</span>
                 </h2>
                 <p class="section-description">
                     Nos objectifs sont ambitieux et ne peuvent être atteints qu'en partenariat.
@@ -40,9 +40,7 @@
                     <div class="hex-item big main-brand">
                         <div class="hex-content">
                             <div class="brand-logo-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                                <img src="../../assets/partners/LOGO ROND.png" class="adn__logo" alt="">
                             </div>
                         </div>
                         <div class="hex-pulse"></div>
@@ -76,12 +74,7 @@
             </transition>
 
             <div class="cta-container" :class="{ 'animated': showContent }">
-                <button class="partner-btn">
-                    Devenir Partenaire
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </button>
+                <moreButton label="Devenir partenaire" @click="()=> router.push('/partner')"/>
             </div>
         </div>
     </section>
@@ -89,6 +82,17 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+import moreButton from '../button/moreButton.vue';
+
+import partnerPic1 from '../../assets/partners/6324bc47b4b22-millenium-fdfp-cote-ivoire.png';
+import partnerPic2 from '../../assets/partners/MILLENIUM-CHALLENGE-ACCOUNT.png';
+import partnerPic3 from '../../assets/partners/giz-logo-01.jpg';
+import partnerPic4 from '../../assets/partners/OIP (1).webp';
+import partnerPic5 from '../../assets/partners/OIP (1).webp';
+import partnerPic6 from '../../assets/partners/OIP (2).webp';
+import partnerPic7 from '../../assets/partners/millennium-challenge-corporation-logo-png_seeklogo-245301.png';
+import partnerPic8 from '../../assets/partners/clients-logo-05.png';
+import { useRouter } from 'vue-router';
 
 // --- Types ---
 interface Partner {
@@ -98,17 +102,19 @@ interface Partner {
     category: string;
 }
 
+const router = useRouter();
+
 // --- Data ---
 // J'utilise des SVGs placeholder. Remplace par les URLs de tes images.
 const partnersData: Partner[] = [
-    { id: 1, name: 'OpenAI', category: 'AI Intelligence', logo: 'https://cdn.worldvectorlogo.com/logos/openai-2.svg' },
-    { id: 2, name: 'AWS', category: 'Cloud Infrastructure', logo: 'https://cdn.worldvectorlogo.com/logos/aws-2.svg' },
-    { id: 3, name: 'Google', category: 'Search & Data', logo: 'https://cdn.worldvectorlogo.com/logos/google-1-1.svg' },
-    { id: 4, name: 'Microsoft', category: 'Enterprise Solutions', logo: 'https://cdn.worldvectorlogo.com/logos/microsoft-5.svg' },
-    { id: 5, name: 'Intel', category: 'Hardware', logo: 'https://cdn.worldvectorlogo.com/logos/intel.svg' },
-    { id: 6, name: 'Meta', category: 'Social Connection', logo: 'https://cdn.worldvectorlogo.com/logos/meta-1.svg' },
-    { id: 7, name: 'Asus', category: 'Hardware Partner', logo: 'https://cdn.worldvectorlogo.com/logos/asus-rog-1.svg' },
-    { id: 8, name: 'Discord', category: 'Community', logo: 'https://cdn.worldvectorlogo.com/logos/discord-6.svg' },
+    { id: 1, name: 'OpenAI', category: 'AI Intelligence', logo: partnerPic1 },
+    { id: 2, name: 'AWS', category: 'Cloud Infrastructure', logo: partnerPic2 },
+    { id: 3, name: 'Google', category: 'Search & Data', logo: partnerPic3 },
+    { id: 4, name: 'Microsoft', category: 'Enterprise Solutions', logo: partnerPic4 },
+    { id: 5, name: 'Intel', category: 'Hardware', logo: partnerPic5 },
+    { id: 6, name: 'Meta', category: 'Social Connection', logo: partnerPic6 },
+    { id: 7, name: 'Asus', category: 'Hardware Partner', logo: partnerPic7 },
+    { id: 8, name: 'Discord', category: 'Community', logo: partnerPic8 },
 ];
 
 // Répartition automatique gauche/droite pour équilibrer le design
@@ -299,9 +305,8 @@ onUnmounted(() => {
 .partner-logo {
     max-width: 100%;
     max-height: 100%;
-    filter: grayscale(100%) brightness(1.5); /* Blanc/Gris par défaut */
     transition: 0.4s;
-    opacity: 0.7;
+    opacity: 1;
 }
 
 /* Bordure simulée (car clip-path coupe border) */
@@ -335,8 +340,8 @@ onUnmounted(() => {
 }
 
 .brand-logo-placeholder {
-    width: 60px;
-    height: 60px;
+    width: 120px;
+    height: 120px;
     color: #f8fafc;
     filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
 }

@@ -95,19 +95,25 @@ const services = [
     title: "Création et la protection d'entreprise",
     description: "Des solutions sur mesure pour lancer et sécuriser votre entreprise.",
     theme: "theme-purple",
-    features: ["Constitution d'entreprises", "Dissolution d'entreprises", "Design System"]
+    features: ["Constitution d'entreprises", "Dissolution d'entreprises", "Diagnostic juridique", "Propriété intellectuelle", "etc."]
   },
   {
     title: "Suivi et accompagnement juridique",
     description: "Au cas où vous disposeriez d'une entreprise, nous vous accompagnons dans la gestion de vos obligations juridiques.",
     theme: "theme-blue",
-    features: ["Rédaction de contrats", "Gestion des litiges", "Conformité réglementaire"]
+    features: ["Accompagnement","Rédaction de contrats", "Gestion des litiges", "Conformité réglementaire", "etc."]
   },
   {
     title: "La conformité et ressources humaines",
     description: "Nous vous aidons à respecter les normes légales et à gérer vos ressources humaines.",
     theme: "theme-pink",
-    features: ["Audit de conformité", "Formation en droit du travail", "Gestion des ressources humaines"]
+    features: [
+      "Audit de conformité", 
+      "Formation en droit du travail", 
+      "Gestion des ressources humaines", 
+      "Mise en conformité de site web",
+      "Pack spécial RH"
+    ]
   }
 ];
 </script>

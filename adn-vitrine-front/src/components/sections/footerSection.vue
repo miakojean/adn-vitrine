@@ -36,7 +36,7 @@
                         </ul>
                     </div>
                     
-                    <div class="links-group">
+                    <div class="links-group" id="#contact">
                         <h3 class="links-title">Contact</h3>
                         <ul class="links-list">
                             <li><a href="mailto:contact@adnconsulting.com" class="footer-link">contact@adnconsulting.com</a></li>
@@ -60,11 +60,6 @@
                                 <path d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M6 9H2V21H6V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                        <a href="https://github.com" class="social-link" target="_blank" aria-label="GitHub">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 2C6.477 2 2 6.477 2 12C2 16.418 5.578 20 10 21C10.5 21.083 10.75 20.75 10.75 20.438C10.75 20.125 10.729 19.5 10.729 18.875C7.999 19.438 7.25 18.125 7.125 17.562C7 17.312 6.625 16.562 6.125 16.375C5.75 16.188 5.125 15.75 6.125 15.75C7.125 15.75 7.688 16.688 7.875 17.062C8.5 18.375 9.625 18 10.75 17.75C10.875 17.125 11.188 16.688 11.5 16.438C8.875 16.188 6.125 15.312 6.125 11.438C6.125 10.313 6.5 9.375 7.125 8.625C7 8.375 6.625 7.375 7.25 6.125C7.25 6.125 8.125 5.875 10.75 7.375C11.875 7.062 13 7 14.125 7.062C15.25 7 16.375 7.062 17.5 7.375C20.125 5.875 21 6.125 21 6.125C21.625 7.375 21.25 8.375 21.125 8.625C21.75 9.375 22.125 10.313 22.125 11.438C22.125 15.312 19.375 16.188 16.75 16.438C17.125 16.75 17.5 17.312 17.5 18.25C17.5 19.625 17.5 20.75 17.5 20.438C17.5 20.75 17.75 21.083 18.25 21C22.422 20 26 16.418 26 12C26 6.477 21.523 2 16 2H12Z" fill="currentColor"/>
                             </svg>
                         </a>
                     </div>

@@ -1,5 +1,5 @@
 <template>
-    <button class="cta-button" @click="handleCtaClick">
+    <button class="cta-button">
         <span> {{ label }}</span>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
@@ -19,12 +19,9 @@ export default {
     },
 
     setup() {
-        const handleCtaClick = () => {
-        window.location.href = '/portfolio';
-        };
 
         return {
-            handleCtaClick,
+            
         };
     },
 };
@@ -36,7 +33,7 @@ export default {
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 2.5rem;
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(90deg, #3b82f6, #3679e5);
     color: white;
     border: none;
     border-radius: 50px;

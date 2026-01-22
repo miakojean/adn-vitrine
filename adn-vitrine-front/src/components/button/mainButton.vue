@@ -40,7 +40,7 @@ export default {
     align-items: center;
     gap: 0.75rem;
     padding: 1rem;
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(90deg, #3b82f6, #3679e5);
     color: white;
     border: none;
     border-radius: 50px;
@@ -49,7 +49,7 @@ export default {
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; 
 }
 
 .cta-button::before {

@@ -74,6 +74,7 @@ export default {
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
+    color: white;
 }
 
 .team__info p {

@@ -57,7 +57,6 @@
                         class="carousel__item" 
                         :name="member.name" 
                         :role="member.role"
-                        :class="{ 'active': index === currentIndex }"
                     />
                 </div>
 
@@ -297,7 +296,7 @@ export default defineComponent({
 
 .main__description p {
     font-size: 1.1rem;
-    color: #94a3b8;
+    color: #c3d8f4;
     line-height: 1.8;
     text-align: center;
 }
@@ -386,12 +385,7 @@ export default defineComponent({
     flex: 0 0 calc(85% - 12px);
     scroll-snap-align: center;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0.7;
-}
-
-.carousel__item.active {
     opacity: 1;
-    transform: scale(1.02);
 }
 
 /* Navigation Arrows */

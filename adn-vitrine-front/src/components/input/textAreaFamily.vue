@@ -7,8 +7,7 @@
         >
             {{ label }}
         </label>
-        <input 
-            :type="type" 
+        <textarea 
             :name="name" 
             :id="name" 
             :placeholder="placeholder" 
@@ -16,7 +15,7 @@
             class="input__field"
             :value="modelValue"
             @input="updateValue($event)"
-        />
+        ></textarea>
     </div>
 </template>
 
@@ -54,7 +53,7 @@ export default defineComponent({
     emits: ['update:modelValue'],
     methods: {
         updateValue(event: Event) {
-            const target = event.target as HTMLInputElement;
+            const target = event.target as HTMLTextAreaElement;
             let value: string | number = target.value;
             
             // Gestion des nombres
@@ -82,12 +81,12 @@ export default defineComponent({
     flex-direction: column;
     gap: 0.5rem;
 }
-input{
+textarea{
     padding: 1rem;
     width: 100%;
     color: #dfecfd;
     border: 1px solid #dae5f2;
-    border-radius: 0.5rem;
+    border-radius: 0.4rem;
     outline: #A7CEFD;
 }
 label{

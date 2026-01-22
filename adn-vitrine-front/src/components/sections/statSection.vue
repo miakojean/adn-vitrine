@@ -44,7 +44,7 @@
             
             <!-- CTA supplémentaire -->
             <div class="stats-cta" v-if="showStats">
-                <moreButton @click="handleCtaClick"/>
+                <moreButton @click="handleCtaClick" label="Découvrir nos services"/>
             </div>
 
         </div>
@@ -96,7 +96,7 @@ const stats = reactive<AnimatedStat[]>([
         hasPlus: false,
         title: "Années d'Expérience",
         description: "Expertise accumulée depuis 2014",
-        tag: "Expert reconnu",
+        tag: "Expertise reconnue",
         animated: false,
         displayValue: 0
     }
