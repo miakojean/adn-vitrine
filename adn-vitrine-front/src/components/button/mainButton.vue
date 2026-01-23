@@ -1,11 +1,12 @@
 <template>
-    <button class="cta-button" @click="handleCtaClick">
+    <button class="cta-button">
         <span v-if="isLoading===false"> {{ label }}</span>
         <span v-if="isLoading" class="loading loading-spinner loading-md"></span>
     </button>
 </template>
 
 <script lang="ts">
+
 export default {
     name: 'moreButton',
 
@@ -22,8 +23,7 @@ export default {
 
     setup() {
         const handleCtaClick = () => {
-            console.log('CTA clicked');
-            // Naviguer vers la page de contact
+            return;
         };
 
         return {

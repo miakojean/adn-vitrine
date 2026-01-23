@@ -36,7 +36,7 @@
             <li><router-link to="/newsletter" class="nav__link" active-class="active" @click="closeMenu">Newsletter</router-link></li>
         </ul>
         <div class="nav__cta">
-            <mainButton />
+            <mainButton @click="navigateToExternal('contratchap.com')"/>
         </div>
     </div>
     
@@ -83,6 +83,11 @@ export default defineComponent({
             router.push(route);
             closeMenu();
         };
+
+        const navigateToExternal = (url: string) => {
+            window.location.href = url;
+            closeMenu();
+        };
         
         // Fermer le menu avec la touche Escape
         const handleEscape = (e: KeyboardEvent) => {
@@ -108,7 +113,8 @@ export default defineComponent({
             isMenuOpen,
             toggleMenu,
             closeMenu,
-            navigateTo
+            navigateTo,
+            navigateToExternal
         };
     }
 });

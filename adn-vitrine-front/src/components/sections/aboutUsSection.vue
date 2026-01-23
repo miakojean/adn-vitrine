@@ -1,83 +1,99 @@
 <template>
-    <section class="about__section" id="about">
-        <div class="main__description">
-            <h2 class="section__title">Qui sommes-nous?</h2>
-            <divider 
-                direction="horizontal" 
-                size="small" 
-                :color-start="'#3b82f6'" 
-                :color-middle="'#1e293b'" 
-                :color-end="'#1e293b'" 
-                gradient-angle="90deg" 
-                :margin="'1.5rem 0'"
-            />
-            <p>
-                Depuis sa création, le Cabinet ADN Consulting SAS
-                s'est donné pour mission de faire en sorte que dans 
-                toutes les actions et engagements, les entrepreneurs, 
-                les PMEs et startups voient leurs intérêts grandement 
-                protégés et grandissent sainement.
+  <section class="about__section" id="about">
+    <div class="main__description">
+      <h2 class="section__title">Qui sommes-nous?</h2>
+      <divider 
+        direction="horizontal" 
+        size="small" 
+        :color-start="'#3b82f6'" 
+        :color-middle="'#1e293b'" 
+        :color-end="'#1e293b'" 
+        gradient-angle="90deg" 
+        :margin="'1.5rem 0'"
+      />
+      <p>
+        Depuis sa création, le Cabinet ADN Consulting SAS
+        s'est donné pour mission de faire en sorte que dans 
+        toutes les actions et engagements, les entrepreneurs, 
+        les PMEs et startups voient leurs intérêts grandement 
+        protégés et grandissent sainement.
+      </p>
+      <mainButton 
+        label="Nos services" 
+        type="button" 
+        class="mt-4" 
+        @click="() => router.push('/services')"
+      />
+    </div>
+
+    <div class="about__statistic flex flex-col justify-center items-center mt-16 gap-8 w-full">
+      <h3 class="text-3xl font-bold text-white">ADN Consulting c'est</h3>
+      
+      <div class="stats__image-container">
+        <img src="../../assets/pic/pexels-roboseal34-35457179.jpg" alt="ADN Consulting Office" class="stats__img">
+        <div class="stats__overlay"></div>
+      </div> 
+
+      <div class="stats__grid">
+        <div v-for="(stat, index) in statistics" :key="index" class="stat__card">
+          <h3 class="stat__number">{{ stat.number }}</h3>
+          <p class="stat__label">{{ stat.label }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about__team w-full flex flex-col justify-center items-center gap-8 mt-20">
+        <div class="team__header text-center">
+            <h3 class="text-4xl font-bold text-white">Notre équipe</h3>
+            <p class="mt-4 text-gray-400 max-w-2xl">
+                Des professionnels passionnés et dévoués, spécialisés dans divers domaines du droit et de la technologie.
             </p>
-            <mainButton label="Nos services" type="button" class="mt-4" @click="() => router.push('/services')"/>
         </div>
 
-        <div class="about__statistic flex flex-col justify-center items-center mt-16 gap-8 w-full">
-            <h3 class="text-3xl font-bold text-white">ADN Consulting c'est</h3>
-            
-            <div class="stats__image-container">
-                <img src="../../assets/pic/pexels-roboseal34-35457179.jpg" alt="ADN Consulting Office" class="stats__img">
-                <div class="stats__overlay"></div>
-            </div>
+        <div class="carousel__wrapper">
+            <button 
+                class="nav-btn prev" 
+                @click="scrollPrev" 
+                aria-label="Précédent" 
+                :disabled="currentIndex === 0"
+            >
+                <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </button>
 
-            <div class="stats__grid">
-                <div v-for="(stat, index) in statistics" :key="index" class="stat__card">
-                    <h3 class="stat__number">{{ stat.number }}</h3>
-                    <p class="stat__label">{{ stat.label }}</p>
-                </div>
-            </div>
+        <div class="carousel__container" ref="carouselRef" @scroll="handleScroll">
+          <teamCards 
+            v-for="member in teamMembers" 
+            :key="member.name" 
+            class="carousel__item" 
+            :name="member.name" 
+            :role="member.role"
+            :picUrl="member.pictureUrl"
+          />
         </div>
 
-        <div class="about__team w-full flex flex-col justify-center items-center gap-8 mt-20">
-            <div class="team__header text-center">
-                <h3 class="text-4xl font-bold text-white">Notre équipe</h3>
-                <p class="mt-4 text-gray-400 max-w-2xl">
-                    Des professionnels passionnés et dévoués, spécialisés dans divers domaines du droit et de la technologie.
-                </p>
-            </div>
-
-            <div class="carousel__wrapper">
-                <button class="nav-btn prev" @click="scrollPrev" aria-label="Précédent" :disabled="currentIndex === 0">
-                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                </button>
-
-                <div class="carousel__container" ref="carouselRef" @scroll="handleScroll">
-                    <teamCards 
-                        v-for="(member, index) in teamMembers" 
-                        :key="member.name" 
-                        class="carousel__item" 
-                        :name="member.name" 
-                        :role="member.role"
-                    />
-                </div>
-
-                <button class="nav-btn next" @click="scrollNext" aria-label="Suivant" :disabled="currentIndex >= teamMembers.length - itemsPerView">
-                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
-                </button>
-            </div>
-            
-            <div class="carousel__indicators">
-                <div class="indicator-track">
-                    <div 
-                        class="indicator-bar" 
-                        :style="{
-                            width: `${indicatorWidth}%`,
-                            transform: `translateX(${indicatorPosition}%)`
-                        }"
-                    ></div>
-                </div>
-            </div>
+        <button 
+          class="nav-btn next" 
+          @click="scrollNext" 
+          aria-label="Suivant" 
+          :disabled="currentIndex >= teamMembers.length - itemsPerView"
+        >
+          <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+        </button>
         </div>
-    </section>
+      
+      <div class="carousel__indicators">
+        <div class="indicator-track">
+          <div 
+            class="indicator-bar" 
+            :style="{
+              width: `${indicatorWidth}%`,
+              transform: `translateX(${indicatorPosition}%)`
+            }"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script lang="ts">
@@ -87,181 +103,118 @@ import mainButton from '../button/mainButton.vue';
 import divider from '../tools/divider.vue';
 import teamCards from '../cards/teamCards.vue';
 
+// Pictures import
+import pic1 from '../../assets/memberPic/PHOTO MME ANGE DESIRE NIOULE.jpg'
+import pic2 from '../../assets/memberPic/grâce_nioule.jpeg'
+import pic3 from '../../assets/memberPic/monsieur_roch.jpeg'
+import pic4 from '../../assets/memberPic/malaro.jpeg'
+import pic5 from '../../assets/memberPic/tosseta.jpeg'
+import pic6 from '../../assets/memberPic/IMG_9088.jpeg'
+
+interface Member {
+  id?: number;
+  name: string;
+  pictureUrl?: string;
+  role: string;
+  bio: string;
+}
+
 export default defineComponent({
-    name: 'AboutUsSection',
-    components: { mainButton, divider, teamCards },
-    setup() {
-        const router = useRouter();
-        const carouselRef = ref<HTMLElement | null>(null);
-        const currentIndex = ref(0);
-        const itemsPerView = ref(1);
-        const maxVisibleSlides = ref(3);
-        const scrollDebounce = ref<NodeJS.Timeout | null>(null);
-        
-        const statistics = [
-            { number: '1000+', label: 'Entreprises accompagnées' },
-            { number: '1700+', label: 'Documents rédigés' },
-            { number: '20+', label: 'Pays clients' },
-            { number: '03', label: 'Filiales' },
-            { number: '8+', label: "Années d'expérience" },
-            { number: '1', label: 'Legaltech' }
-        ];
+  name: 'AboutUsSection',
+  components: { mainButton, divider, teamCards },
+  setup() {
+    const router = useRouter(); // Correction syntaxique : exécution de la fonction
+    const carouselRef = ref<HTMLElement | null>(null);
+    const currentIndex = ref(0);
+    const itemsPerView = ref(1);
+    const scrollDebounce = ref<ReturnType<typeof setTimeout> | null>(null);
+    
+    const statistics = [
+      { number: '1000+', label: 'Entreprises accompagnées' },
+      { number: '1700+', label: 'Documents rédigés' },
+      { number: '20+', label: 'Pays clients' },
+      { number: '03', label: 'Filiales' },
+      { number: '8+', label: "Années d'expérience" },
+      { number: '1', label: 'Legaltech' }
+    ];
 
-        // Calcul des slides visibles
-        const visibleDots = computed(() => {
-            return Math.ceil(teamMembers.value.length / itemsPerView.value);
-        });
+    const teamMembers: Member[] = [
+      { name: 'Ange Désiré NIOULE', pictureUrl: pic1, role: 'fondatrice & CEO', bio: '...' },
+      { name: 'Emlice KPANDJO', pictureUrl: pic1, role: 'Directrice juridique', bio: '...' },
+      { name: 'Rushdan BACHABI', pictureUrl: pic3, role: 'Directeur des innovations', bio: '...' },
+      { name: 'Tosseta DOH', pictureUrl: pic5, role: 'Legal Marketing Officer', bio: '...' },
+      { name: 'Josué KOFFI', pictureUrl: pic6, role: 'Legal Sales officer', bio: '...' },
+      { name: 'Nathanael NESSON', pictureUrl: pic1, role: 'Graphiste Designer', bio: '...' },
+      { name: 'Malaro DJANE', pictureUrl: pic4, role: 'Assistante Administrative et Executive', bio: '...' },
+      { name: 'Grâce NIOULE', pictureUrl: pic2, role: 'Community Manager', bio: '...' },
+      { name: 'Jean Yves MIAKO', pictureUrl: pic1, role: 'Développeur full stack', bio: '...' },
+      { name:'Assi ELOU Hervé', pictureUrl: pic1, role: 'Legal ops', bio: '...' },
+    ];
 
-        // Calcul de la largeur de l'indicateur
-        const indicatorWidth = computed(() => {
-            return 100 / visibleDots.value;
-        });
+    // Calculs pour le carrousel
+    const visibleDots = computed(() => Math.ceil(teamMembers.length / itemsPerView.value));
+    const indicatorWidth = computed(() => 100 / visibleDots.value);
+    const indicatorPosition = computed(() => {
+      const slideGroup = Math.floor(currentIndex.value / itemsPerView.value);
+      return slideGroup * 100;
+    });
 
-        // Calcul de la position de l'indicateur
-        const indicatorPosition = computed(() => {
-            const slideGroup = Math.floor(currentIndex.value / itemsPerView.value);
-            return slideGroup * 100;
-        });
+    const updateCurrentIndex = () => {
+      if (!carouselRef.value) return;
+      const scrollLeft = carouselRef.value.scrollLeft;
+      const cardWidth = carouselRef.value.offsetWidth / itemsPerView.value;
+      const newIndex = Math.round(scrollLeft / cardWidth);
+      currentIndex.value = Math.max(0, Math.min(newIndex, teamMembers.length - itemsPerView.value));
+    };
 
-        const scrollNext = () => {
-            if (carouselRef.value) {
-                const scrollAmount = carouselRef.value.clientWidth;
-                carouselRef.value.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                updateCurrentIndex();
-            }
-        };
+    const handleScroll = () => {
+      if (scrollDebounce.value) clearTimeout(scrollDebounce.value);
+      scrollDebounce.value = setTimeout(updateCurrentIndex, 100);
+    };
 
-        const scrollPrev = () => {
-            if (carouselRef.value) {
-                const scrollAmount = -carouselRef.value.clientWidth;
-                carouselRef.value.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                updateCurrentIndex();
-            }
-        };
+    const scrollNext = () => {
+      if (carouselRef.value) {
+        carouselRef.value.scrollBy({ left: carouselRef.value.clientWidth, behavior: 'smooth' });
+      }
+    };
 
-        const goToSlide = (slideIndex: number) => {
-            if (carouselRef.value) {
-                const scrollAmount = slideIndex * carouselRef.value.clientWidth;
-                carouselRef.value.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-                currentIndex.value = slideIndex * itemsPerView.value;
-            }
-        };
+    const scrollPrev = () => {
+      if (carouselRef.value) {
+        carouselRef.value.scrollBy({ left: -carouselRef.value.clientWidth, behavior: 'smooth' });
+      }
+    };
 
-        const handleScroll = () => {
-            if (scrollDebounce.value) {
-                clearTimeout(scrollDebounce.value);
-            }
-            
-            scrollDebounce.value = setTimeout(() => {
-                updateCurrentIndex();
-            }, 100);
-        };
+    const updateItemsPerView = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) itemsPerView.value = 3;
+      else if (width >= 768) itemsPerView.value = 2;
+      else itemsPerView.value = 1;
+    };
 
-        const updateCurrentIndex = () => {
-            if (!carouselRef.value) return;
-            
-            const scrollLeft = carouselRef.value.scrollLeft;
-            const cardWidth = carouselRef.value.scrollWidth / teamMembers.value.length;
-            const newIndex = Math.round(scrollLeft / cardWidth);
-            
-            // Limiter l'index aux bornes
-            currentIndex.value = Math.max(0, Math.min(newIndex, teamMembers.value.length - itemsPerView.value));
-        };
+    onMounted(() => {
+      updateItemsPerView();
+      window.addEventListener('resize', updateItemsPerView);
+    });
 
-        const updateItemsPerView = () => {
-            const width = window.innerWidth;
-            
-            if (width >= 1024) {
-                itemsPerView.value = 3;
-            } else if (width >= 768) {
-                itemsPerView.value = 2;
-            } else {
-                itemsPerView.value = 1;
-            }
-        };
+    onUnmounted(() => {
+      window.removeEventListener('resize', updateItemsPerView);
+      if (scrollDebounce.value) clearTimeout(scrollDebounce.value);
+    });
 
-        // About team 
-        const teamMembers = ref([
-            {
-                name: 'Ange Désiré NIOULE',
-                role: 'fondatrice & CEO',
-                bio: 'Alice possède plus de 10 ans d\'expérience dans le conseil aux entreprises en matière de conformité réglementaire et de contrats commerciaux.'
-            },
-            {
-                name: 'Emlice KPANDJO',
-                role: 'Directrice juridique',
-                bio: 'Marc est un expert en solutions technologiques pour le secteur juridique, aidant les cabinets à optimiser leurs processus grâce à l\'innovation.'
-            },
-            {
-                name: 'Rushdan BACHABI',
-                role: 'Directeur des innovations',
-                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
-            },
-            {
-                name: 'Tosseta DOH',
-                role: 'Legal Marketing Officer',
-                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
-            },
-            {
-                name: 'Josué KOFFI',
-                role: 'Legal Sell',
-                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
-            },
-            {
-                name: 'Nathanael NESSON',
-                role: 'Graphiste Designer',
-                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
-            },
-            {
-                name: 'Malaro DJANE',
-                role: 'Assistante Administrative et Executive',
-                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
-            },
-            {
-                name: 'Grâce NIOULE',
-                role: 'Community Manager',
-                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
-            },
-            {
-                name: 'Jean Yves MIAKO',
-                role: 'Développeur full stack',
-                bio: 'Sophie accompagne les startups et PMEs dans la protection de leurs innovations et créations intellectuelles à l\'échelle internationale.'
-            }
-        ]);
-
-        // Lifecycle
-        onMounted(() => {
-            updateItemsPerView();
-            window.addEventListener('resize', updateItemsPerView);
-            
-            // Auto-scroll pour démonstration (optionnel)
-            // const autoScroll = setInterval(scrollNext, 5000);
-            // onUnmounted(() => clearInterval(autoScroll));
-        });
-
-        onUnmounted(() => {
-            window.removeEventListener('resize', updateItemsPerView);
-            if (scrollDebounce.value) {
-                clearTimeout(scrollDebounce.value);
-            }
-        });
-
-        return { 
-            router, 
-            statistics, 
-            carouselRef, 
-            currentIndex,
-            itemsPerView,
-            visibleDots,
-            indicatorWidth,
-            indicatorPosition,
-            scrollNext, 
-            scrollPrev,
-            handleScroll,
-            goToSlide,
-            teamMembers 
-        };
-    }
+    return { 
+      router, 
+      statistics, 
+      carouselRef, 
+      currentIndex,
+      itemsPerView,
+      indicatorWidth,
+      indicatorPosition,
+      scrollNext, 
+      scrollPrev,
+      handleScroll,
+      teamMembers 
+    };
+  }
 });
 </script>
 

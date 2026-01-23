@@ -1,7 +1,7 @@
 <template>
     <article class="team__card">
         <div class="team__picture">
-            <img src="https://picsum.photos/800/600" alt="image aléatoire">
+            <img :src="picUrl" alt="image aléatoire">
         </div>
         <div class="team__info">
             <h3>
@@ -33,6 +33,10 @@ export default {
             type: String,
             default: 'Developer',
         },
+        picUrl:{
+            type: String,
+            default: 'https://picsum.photos/800/600',
+        },
     },
 
     setup(){
@@ -47,6 +51,7 @@ export default {
 .team__card {
     width: 100%;
     min-width: 300px;
+    max-height: 500px;
     background-color: #0F172A;
     border-radius: 0.5rem;
     display: flex;
@@ -55,9 +60,13 @@ export default {
     border: 1px solid #4c6998;
 }
 
+.team__picture{
+    height: 70%;
+}
+
 .team__picture img {
     width: 100%;
-    height: auto;
+    background-size: cover;
     border-radius: 0.5rem;
 }
 
@@ -68,6 +77,7 @@ export default {
     gap: 0.5rem;
     color: white;
     padding: 1rem;
+    height: 30%;
 }
 
 .team__info h3 {

@@ -328,7 +328,7 @@ onUnmounted(() => {
 .stat-number {
     font-size: 5rem;
     font-weight: 900;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: var(--primary-blue);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

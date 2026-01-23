@@ -58,11 +58,7 @@
                             <div class="member-info">
                                 <h3 class="member-name">{{ member.name }}</h3>
                                 <p class="member-role">{{ member.role }}</p>
-
-                                <!-- Bio courte -->
-                                <p class="member-bio">
-                                    {{ truncateText(member.bio, 100) }}
-                                </p>
+                                
                             </div>
                             
 
@@ -98,7 +94,6 @@
                         <div class="modal-header">
                             <div class="modal-photo">
                                 <img :src="selectedMember.photo" :alt="selectedMember.name" />
-                                <div class="modal-status" :class="{ online: selectedMember.online }"></div>
                             </div>
                             <div class="modal-header-info">
                                 <h3>{{ selectedMember.name }}</h3>
@@ -128,27 +123,7 @@
                                 </div>
                             </div>
 
-                            <div class="detail-section">
-                                <h4>Statistiques</h4>
-                                <div class="stats-grid">
-                                    <div class="stat-card">
-                                        <span class="stat-number">{{ selectedMember.projects }}</span>
-                                        <span class="stat-title">Projets</span>
-                                    </div>
-                                    <div class="stat-card">
-                                        <span class="stat-number">{{ selectedMember.experience }}</span>
-                                        <span class="stat-title">Années d'exp</span>
-                                    </div>
-                                    <div class="stat-card">
-                                        <span class="stat-number">{{ selectedMember.clients }}</span>
-                                        <span class="stat-title">Clients</span>
-                                    </div>
-                                    <div class="stat-card">
-                                        <span class="stat-number">{{ selectedMember.awards }}</span>
-                                        <span class="stat-title">Récompenses</span>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -161,6 +136,10 @@
 import { ref, computed, onMounted, onUnmounted, reactive } from 'vue';
 import moreButton from '../button/moreButton.vue';
 import { useRouter } from 'vue-router';
+
+import pic1 from '../../assets/memberPic/PHOTO MME ANGE DESIRE NIOULE.jpg';
+import pic2 from '../../assets/memberPic/EMLICE KPANDJO.png';
+import pic3 from '../../assets/memberPic/PHOTO MME ANGE DESIRE NIOULE.jpg'
 
 // Types
 interface TeamMember {
@@ -181,11 +160,6 @@ interface TeamMember {
     email: string;
     phone: string;
     projects: number;
-    experience: number;
-    clients: number;
-    awards: number;
-    online: boolean;
-    category: string[];
 }
 
 interface Category {
@@ -212,7 +186,7 @@ const teamMembers: TeamMember[] = [
         name: 'Ange Désirée NIOULE',
         role: 'Founder & CEO',
         department: 'Développement',
-        photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+        photo: pic1,
         bio: 'Expert en architectures cloud et solutions évolutives.',
         fullBio: 'Avec plus de 10 ans d\'expérience dans le développement full-stack, Alexandre excelle dans la création d\'architectures cloud robustes et évolutives. Passionné par les technologies émergentes et les bonnes pratiques de développement.',
         tags: ['React', 'Node.js', 'AWS', 'TypeScript', 'Docker'],
@@ -225,18 +199,13 @@ const teamMembers: TeamMember[] = [
         email: 'alexandre@entreprise.com',
         phone: '+33 1 23 45 67 89',
         projects: 42,
-        experience: 10,
-        clients: 28,
-        awards: 5,
-        online: true,
-        category: ['dev', 'management']
     },
     {
         id: 2,
         name: 'Emlice PKANDJO',
         role: 'Directrice juridique',
         department: 'Juridique',
-        photo: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop',
+        photo: pic2,
         bio: 'Spécialiste en design d\'interface et expérience utilisateur.',
         fullBio: 'Sophie combine une expertise en design d\'interface avec une approche centrée sur l\'utilisateur. Elle dirige une équipe de designers talentueux pour créer des expériences digitales mémorables et fonctionnelles.',
         tags: ['UI/UX', 'Figma', 'Design System', 'Prototypage'],
@@ -249,18 +218,13 @@ const teamMembers: TeamMember[] = [
         email: 'sophie@entreprise.com',
         phone: '+33 1 23 45 67 90',
         projects: 38,
-        experience: 8,
-        clients: 45,
-        awards: 7,
-        online: true,
-        category: ['design', 'management']
     },
     {
         id: 3,
         name: 'Rushdan BACHABI',
         role: 'Directeur de l\'innovation',
         department: 'Innovation',
-        photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w-400&h=400&fit=crop',
+        photo: pic3,
         bio: 'Passionné par Vue.js et les animations web modernes.',
         fullBio: 'Thomas est spécialisé dans le développement frontend avec Vue.js. Il adore créer des interfaces interactives et performantes, en mettant l\'accent sur les animations fluides et l\'expérience utilisateur.',
         tags: ['Vue.js', 'JavaScript', 'CSS3', 'Animation'],
@@ -273,11 +237,6 @@ const teamMembers: TeamMember[] = [
         email: 'thomas@entreprise.com',
         phone: '+33 1 23 45 67 91',
         projects: 27,
-        experience: 4,
-        clients: 19,
-        awards: 2,
-        online: false,
-        category: ['dev']
     },
     
 ];

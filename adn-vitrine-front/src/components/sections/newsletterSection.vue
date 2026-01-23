@@ -5,13 +5,8 @@
       <div class="newsletter__content">
         <h3 class="newsletter__title">
           Soyez au courant <br />
-          des dernières nouveautés.
+          des dernières nouveautés à travers notre newsletter.
         </h3>
-        <p class="newsletter__description">
-          Abonnez-vous à notre newsletter pour recevoir les dernières mises à jour,
-          des conseils exclusifs et des offres spéciales directement dans votre boîte
-          de réception.
-        </p>
         <newsletterForm />
       </div>
 

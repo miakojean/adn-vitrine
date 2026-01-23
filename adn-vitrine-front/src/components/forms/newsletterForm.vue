@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="w-full">
     <form v-if="!isSuccess" class="newsletter__form" @submit.prevent="handleSubmit">
       <inputFamily 
         v-model="payload.firstName"
