@@ -31,15 +31,14 @@
                         <h3 class="links-title">Entreprise</h3>
                         <ul class="links-list">
                             <li><a href="/about" class="footer-link">À propos</a></li>
-                            <li><a href="/team" class="footer-link">Équipe</a></li>
-                            <li><a href="/careers" class="footer-link">Carrières</a></li>
+                            <li><a href="/about" class="footer-link">Équipe</a></li>
                         </ul>
                     </div>
                     
                     <div class="links-group" id="#contact">
                         <h3 class="links-title">Contact</h3>
                         <ul class="links-list">
-                            <li><a href="mailto:contact@adnconsulting.com" class="footer-link">contact@adnconsulting.com</a></li>
+                            <li><a href="mailto:consultingadnsas@gmail.com" class="footer-link">consultingadnsas@gmail.com</a></li>
                             <li><a href="tel:+2250123456789" class="footer-link">+225 01 23 45 67 89</a></li>
                             <li class="footer-link">Abidjan, Côte d'Ivoire</li>
                         </ul>

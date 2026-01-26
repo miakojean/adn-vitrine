@@ -94,6 +94,7 @@
       </div>
     </div>
   </section>
+  
 </template>
 
 <script lang="ts">
@@ -102,6 +103,7 @@ import { useRouter } from 'vue-router';
 import mainButton from '../button/mainButton.vue';
 import divider from '../tools/divider.vue';
 import teamCards from '../cards/teamCards.vue';
+import patnerSection from './patnerSection.vue';
 
 // Pictures import
 import pic1 from '../../assets/memberPic/PHOTO MME ANGE DESIRE NIOULE.jpg'
@@ -110,6 +112,9 @@ import pic3 from '../../assets/memberPic/monsieur_roch.jpeg'
 import pic4 from '../../assets/memberPic/malaro.jpeg'
 import pic5 from '../../assets/memberPic/tosseta.jpeg'
 import pic6 from '../../assets/memberPic/IMG_9088.jpeg'
+import pic7 from '../../assets/memberPic/assi.jpeg'
+import pic8 from '../../assets/memberPic/EMLICE_KPANDJO.png'
+import pic9 from '../../assets/memberPic/1769441982210.png'
 
 interface Member {
   id?: number;
@@ -117,6 +122,11 @@ interface Member {
   pictureUrl?: string;
   role: string;
   bio: string;
+}
+
+interface statistics {
+  number: string;
+  label: string
 }
 
 export default defineComponent({
@@ -129,26 +139,27 @@ export default defineComponent({
     const itemsPerView = ref(1);
     const scrollDebounce = ref<ReturnType<typeof setTimeout> | null>(null);
     
-    const statistics = [
+    const statistics: statistics[] = [
       { number: '1000+', label: 'Entreprises accompagnées' },
       { number: '1700+', label: 'Documents rédigés' },
       { number: '20+', label: 'Pays clients' },
       { number: '03', label: 'Filiales' },
-      { number: '8+', label: "Années d'expérience" },
+      { number: '9+', label: "Années d'expérience" },
       { number: '1', label: 'Legaltech' }
     ];
 
     const teamMembers: Member[] = [
-      { name: 'Ange Désiré NIOULE', pictureUrl: pic1, role: 'fondatrice & CEO', bio: '...' },
-      { name: 'Emlice KPANDJO', pictureUrl: pic1, role: 'Directrice juridique', bio: '...' },
-      { name: 'Rushdan BACHABI', pictureUrl: pic3, role: 'Directeur des innovations', bio: '...' },
+      { name: 'Ange Désiré NIOULE', pictureUrl: pic1, role: 'Fondatrice & CEO', bio: '...' },
+      { name: 'Emlice KPANDJO', pictureUrl: pic8, role: 'Directrice Juridique', bio: '...' },
+      { name: 'Rushdan BACHABI', pictureUrl: pic3, role: 'Directeur des Innovations', bio: '...' },
       { name: 'Tosseta DOH', pictureUrl: pic5, role: 'Legal Marketing Officer', bio: '...' },
-      { name: 'Josué KOFFI', pictureUrl: pic6, role: 'Legal Sales officer', bio: '...' },
+      { name: 'Josué KOFFI', pictureUrl: pic6, role: 'Legal Sales Officer', bio: '...' },
       { name: 'Nathanael NESSON', pictureUrl: pic1, role: 'Graphiste Designer', bio: '...' },
       { name: 'Malaro DJANE', pictureUrl: pic4, role: 'Assistante Administrative et Executive', bio: '...' },
       { name: 'Grâce NIOULE', pictureUrl: pic2, role: 'Community Manager', bio: '...' },
-      { name: 'Jean Yves MIAKO', pictureUrl: pic1, role: 'Développeur full stack', bio: '...' },
-      { name:'Assi ELOU Hervé', pictureUrl: pic1, role: 'Legal ops', bio: '...' },
+      { name:'Guy-Uriel Sali ASSI', pictureUrl: pic7, role: 'Legal Ops', bio: '...' },
+      {name:'Assita TOURE', pictureUrl:pic1, role:'Contrat Manager', bio:"..."},
+      { name: 'Jean Yves MIAKO', pictureUrl: pic9, role: 'Développeur Full Stack', bio: '...' },
     ];
 
     // Calculs pour le carrousel

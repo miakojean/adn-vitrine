@@ -22,32 +22,46 @@
             </div>
         </div>
 
-        <!-- Articles Grid -->
-        <div class="blog-grid-container">
+        <!-- État "Aucun article" -->
+        <div v-if="!hasArticles" class="empty-state">
+            <div class="empty-state__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875C16.5 4.253 15.996 3.75 15.375 3.75h-1.5a1.125 1.125 0 0 0-1.125 1.125V7.5m-6 3.75H3.375c-.621 0-1.125.504-1.125 1.125v9c0 .621.504 1.125 1.125 1.125h9c.621 0 1.125-.504 1.125-1.125v-9c0-.621-.504-1.125-1.125-1.125H10.5" />
+                </svg>
+            </div>
+            <h3 class="empty-state__title">Aucun article disponible pour le moment</h3>
+            <p class="empty-state__message">
+                Notre équipe est en train de préparer du contenu de qualité pour vous.
+                Revenez bientôt pour découvrir nos premiers articles !
+            </p>
+        </div>
+
+        <!-- Articles Grid (uniquement si hasArticles = true) -->
+        <div v-else class="blog-grid-container">
             <div class="blog-grid">
                 <!-- Featured Large Article -->
                 <article class="article-card featured">
                     <div class="article-card__image">
                         <img src="https://picsum.photos/800/600" alt="Featured article" loading="lazy" />
-                        <div class="article-card__badge">Featured</div>
+                        <span class="article-card__badge">À la une</span>
                     </div>
                     <div class="article-card__content">
                         <div class="article-meta">
                             <span class="article-category">Design</span>
-                            <span class="article-date">May 15, 2024</span>
-                            <span class="article-readtime">8 min read</span>
+                            <span class="article-date">15 Mai 2024</span>
+                            <span class="article-readtime">8 min</span>
                         </div>
                         <h3 class="article-title">
-                            The Future of UI Design: Emerging Trends for 2024
+                            L'avenir du design UI : tendances émergentes pour 2024
                         </h3>
                         <p class="article-excerpt">
-                            Discover how artificial intelligence, immersive experiences, and sustainable design are shaping the next generation of user interfaces.
+                            Découvrez comment l'intelligence artificielle, les expériences immersives et le design durable façonnent la nouvelle génération d'interfaces.
                         </p>
                         <div class="article-author">
-                            <img src="https://i.pravatar.cc/40" alt="Author" class="author-avatar" />
+                            <img src="https://i.pravatar.cc/40" alt="Auteur" class="author-avatar" />
                             <div class="author-info">
                                 <span class="author-name">Sarah Chen</span>
-                                <span class="author-role">Lead Designer</span>
+                                <span class="author-role">Designer principale</span>
                             </div>
                         </div>
                     </div>
@@ -55,13 +69,13 @@
 
                 <!-- Regular Articles -->
                 <article 
-                    v-for="article in articles" 
+                    v-for="article in displayedArticles" 
                     :key="article.id"
                     class="article-card"
                 >
                     <div class="article-card__image">
                         <img :src="article.image" :alt="article.title" loading="lazy" />
-                        <div class="article-card__badge">{{ article.category }}</div>
+                        <span class="article-card__badge">{{ article.category }}</span>
                     </div>
                     <div class="article-card__content">
                         <div class="article-meta">
@@ -82,157 +96,77 @@
                 </article>
             </div>
 
-            <!-- Load More -->
-            <div class="load-more-container">
-                <button class="load-more-btn" @click="loadMoreArticles">
-                    <span>Load More Articles</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </button>
-                <p class="load-more-text">Showing {{ displayedArticles }} of {{ totalArticles }} articles</p>
-            </div>
         </div>
     </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
-import newsletterForm from '../forms/newsletterForm.vue';
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import newsletterForm from '../forms/newsletterForm.vue'
 
-export default defineComponent({
-    name: 'BlogSection',
-    components: { newsletterForm },
-    setup() {
-        const categories = [
-            { id: 'all', label: 'All', count: 24 },
-            { id: 'design', label: 'Design', count: 8 },
-            { id: 'technology', label: 'Technology', count: 6 },
-            { id: 'interviews', label: 'Interviews', count: 5 },
-            { id: 'resources', label: 'Resources', count: 5 }
-        ];
+// Changement ici : mettre à false pour voir l'état "Aucun article"
+const hasArticles = ref(false)
 
-        const activeCategory = ref('all');
-        const displayedArticles = ref(6);
-        const totalArticles = 24;
+const pageSize = 6
+const currentPage = ref(1)
 
-        const articles = ref([
-            {
-                id: 1,
-                title: 'Building Accessible Design Systems',
-                excerpt: 'Learn how to create design systems that work for everyone, including users with disabilities.',
-                image: 'https://picsum.photos/400/300?random=1',
-                category: 'Design',
-                date: 'May 12, 2024',
-                readTime: '6 min read',
-                author: {
-                    name: 'Alex Johnson',
-                    role: 'Accessibility Lead',
-                    avatar: 'https://i.pravatar.cc/40?img=1'
-                }
-            },
-            {
-                id: 2,
-                title: 'The Rise of AI in Product Design',
-                excerpt: 'How artificial intelligence is transforming the way we design and build products.',
-                image: 'https://picsum.photos/400/300?random=2',
-                category: 'Technology',
-                date: 'May 10, 2024',
-                readTime: '7 min read',
-                author: {
-                    name: 'Maria Rodriguez',
-                    role: 'AI Researcher',
-                    avatar: 'https://i.pravatar.cc/40?img=2'
-                }
-            },
-            {
-                id: 3,
-                title: 'Interview with Figma CEO',
-                excerpt: 'An exclusive conversation about the future of collaborative design tools.',
-                image: 'https://picsum.photos/400/300?random=3',
-                category: 'Interviews',
-                date: 'May 8, 2024',
-                readTime: '10 min read',
-                author: {
-                    name: 'David Lee',
-                    role: 'Editor-in-Chief',
-                    avatar: 'https://i.pravatar.cc/40?img=3'
-                }
-            },
-            {
-                id: 4,
-                title: 'Free Icon Sets for 2024',
-                excerpt: 'A curated collection of the best free icon resources for your next project.',
-                image: 'https://picsum.photos/400/300?random=4',
-                category: 'Resources',
-                date: 'May 5, 2024',
-                readTime: '5 min read',
-                author: {
-                    name: 'Emma Wilson',
-                    role: 'Resource Curator',
-                    avatar: 'https://i.pravatar.cc/40?img=4'
-                }
-            },
-            {
-                id: 5,
-                title: 'Mobile UX Best Practices',
-                excerpt: 'Essential guidelines for creating exceptional mobile user experiences.',
-                image: 'https://picsum.photos/400/300?random=5',
-                category: 'Design',
-                date: 'May 3, 2024',
-                readTime: '8 min read',
-                author: {
-                    name: 'James Kim',
-                    role: 'Mobile UX Specialist',
-                    avatar: 'https://i.pravatar.cc/40?img=5'
-                }
-            }
-        ]);
-
-        const loadMoreArticles = () => {
-            if (displayedArticles.value < totalArticles) {
-                displayedArticles.value += 3;
-            }
-        };
-
-        const hasMoreArticles = computed(() => {
-            return displayedArticles.value < totalArticles;
-        });
-
-        return {
-            categories,
-            activeCategory,
-            articles,
-            displayedArticles,
-            totalArticles,
-            hasMoreArticles,
-            loadMoreArticles
-        };
+const articles = ref([
+    {
+        id: 1,
+        title: 'Création de systèmes de design accessibles',
+        excerpt: 'Apprenez à créer des systèmes de design qui fonctionnent pour tous, y compris les utilisateurs en situation de handicap.',
+        image: 'https://picsum.photos/400/300?random=1',
+        category: 'Design',
+        date: '12 Mai 2024',
+        readTime: '6 min',
+        author: { name: 'Alex Johnson', role: 'Responsable accessibilité', avatar: 'https://i.pravatar.cc/40?img=1' }
+    },
+    {
+        id: 2,
+        title: "L'essor de l'IA dans le design produit",
+        excerpt: "Comment l'intelligence artificielle transforme notre façon de concevoir et de construire des produits.",
+        image: 'https://picsum.photos/400/300?random=2',
+        category: 'Technologie',
+        date: '10 Mai 2024',
+        readTime: '7 min',
+        author: { name: 'Maria Rodriguez', role: 'Chercheuse IA', avatar: 'https://i.pravatar.cc/40?img=2' }
+    },
+    {
+        id: 3,
+        title: 'Interview avec le CEO de Figma',
+        excerpt: "Une conversation exclusive sur l'avenir des outils de design collaboratif.",
+        image: 'https://picsum.photos/400/300?random=3',
+        category: 'Interviews',
+        date: '8 Mai 2024',
+        readTime: '10 min',
+        author: { name: 'David Lee', role: 'Rédacteur en chef', avatar: 'https://i.pravatar.cc/40?img=3' }
     }
-});
+])
+
+const displayedArticles = computed(() => 
+    articles.value.slice(0, currentPage.value * pageSize)
+)
+
+const hasMoreArticles = computed(() => 
+    displayedArticles.value.length < articles.value.length
+)
+
+const loadMoreArticles = () => {
+    if (hasMoreArticles.value) {
+        currentPage.value++
+    }
+}
 </script>
 
 <style scoped>
-/* Variables */
 .blog-section {
     --color-bg: #0F172A;
     --color-surface: #1E293B;
-    --color-surface-light: #334155;
     --color-primary: #3B82F6;
-    --color-primary-light: #60A5FA;
+    --color-accent: #8B5CF6;
     --color-text: #F8FAFC;
     --color-text-secondary: #94A3B8;
-    --color-text-muted: #64748B;
     --color-border: #475569;
-    --color-accent: #8B5CF6;
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     
     background-color: var(--color-bg);
     color: var(--color-text);
@@ -243,40 +177,23 @@ export default defineComponent({
 /* Hero Section */
 .blog-hero {
     max-width: 1200px;
-    min-height: 100vh;
     margin: 0 auto 4rem;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 3rem;
     padding: 4rem 0;
     border-bottom: 1px solid var(--color-border);
 }
 
-.blog-hero__cta {
-    width: 100%;
-}
-
-
 @media (min-width: 1024px) {
     .blog-hero {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 1rem;
+        flex-direction: row;
+        gap: 4rem;
     }
-}
-
-.blog-hero__badge {
-    margin-bottom: 1rem;
-}
-
-.blog-hero__badge span {
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-xl);
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    
+    .blog-hero__content { flex: 2; }
+    .blog-hero__cta { flex: 1; }
 }
 
 .blog-hero__title {
@@ -284,10 +201,9 @@ export default defineComponent({
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 1.5rem;
-    background: linear-gradient(to right, #fff, var(--color-primary-light));
+    background: linear-gradient(to right, #fff, var(--color-primary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .blog-hero__subtitle {
@@ -300,8 +216,8 @@ export default defineComponent({
 /* CTA Section */
 .cta-content {
     background: var(--color-surface);
-    border-radius: var(--radius-lg);
-    padding: 1rem;
+    border-radius: 16px;
+    padding: 2rem;
     border: 1px solid var(--color-border);
 }
 
@@ -309,7 +225,6 @@ export default defineComponent({
     font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
-    color: var(--color-text);
 }
 
 .cta-description {
@@ -319,127 +234,65 @@ export default defineComponent({
     margin-bottom: 1.5rem;
 }
 
-/* Navigation */
-.blog-navigation {
-    max-width: 1200px;
-    margin: 0 auto 3rem;
-}
-
-.nav-container {
+/* Empty State */
+.empty-state {
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 4rem 2rem;
+    text-align: center;
     background: var(--color-surface);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
+    border-radius: 24px;
     border: 1px solid var(--color-border);
 }
 
-.nav-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
+.empty-state__icon {
+    margin-bottom: 2rem;
 }
 
-.nav-title {
-    font-size: 1.5rem;
+.empty-state__icon svg {
+    color: var(--color-primary);
+    opacity: 0.7;
+}
+
+.empty-state__title {
+    font-size: 1.75rem;
     font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-text);
 }
 
-.nav-actions {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.nav-filter-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: transparent;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
+.empty-state__message {
+    font-size: 1.125rem;
+    line-height: 1.6;
     color: var(--color-text-secondary);
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.nav-filter-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-}
-
-.nav-view-toggle {
-    display: flex;
-    gap: 0.5rem;
-    background: var(--color-surface-light);
-    padding: 0.25rem;
-    border-radius: var(--radius-sm);
-}
-
-.view-btn {
-    width: 2rem;
-    height: 2rem;
-    display: flex;
+.empty-state__cta {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    background: transparent;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
     border: none;
-    border-radius: var(--radius-sm);
-    color: var(--color-text-secondary);
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.view-btn:hover {
-    background: var(--color-surface);
-    color: var(--color-text);
-}
-
-.view-btn.active {
-    background: var(--color-surface);
-    color: var(--color-primary);
-}
-
-/* Category Tabs */
-.category-tabs {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.category-tab {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    background: transparent;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    color: var(--color-text-secondary);
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.category-tab:hover {
-    border-color: var(--color-primary);
-    color: var(--color-text);
-}
-
-.category-tab.active {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
+    border-radius: 12px;
     color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.category-count {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.125rem 0.5rem;
-    border-radius: 10px;
-    font-size: 0.75rem;
+.empty-state__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+.empty-state__cta svg {
+    width: 20px;
+    height: 20px;
 }
 
 /* Articles Grid */
@@ -450,15 +303,9 @@ export default defineComponent({
 
 .blog-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
     margin-bottom: 3rem;
-}
-
-@media (min-width: 768px) {
-    .blog-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
 @media (min-width: 1024px) {
@@ -477,7 +324,7 @@ export default defineComponent({
 /* Article Cards */
 .article-card {
     background: var(--color-surface);
-    border-radius: var(--radius-lg);
+    border-radius: 16px;
     overflow: hidden;
     border: 1px solid var(--color-border);
     transition: all 0.3s ease;
@@ -487,7 +334,7 @@ export default defineComponent({
 .article-card:hover {
     transform: translateY(-4px);
     border-color: var(--color-primary);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 .article-card__image {
@@ -514,11 +361,10 @@ export default defineComponent({
     background: var(--color-primary);
     color: white;
     padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-xl);
+    border-radius: 20px;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
 }
 
 .article-card__content {
@@ -543,7 +389,6 @@ export default defineComponent({
     font-weight: 700;
     line-height: 1.4;
     margin-bottom: 0.75rem;
-    color: var(--color-text);
 }
 
 .article-excerpt {
@@ -574,7 +419,6 @@ export default defineComponent({
 .author-name {
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--color-text);
 }
 
 .author-role {
@@ -595,7 +439,7 @@ export default defineComponent({
     padding: 1rem 2.5rem;
     background: var(--color-surface);
     border: 1px solid var(--color-primary);
-    border-radius: var(--radius-xl);
+    border-radius: 20px;
     color: var(--color-primary);
     font-weight: 600;
     cursor: pointer;
@@ -607,11 +451,7 @@ export default defineComponent({
     background: var(--color-primary);
     color: white;
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-.load-more-btn:active {
-    transform: translateY(0);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .load-more-text {
@@ -619,16 +459,7 @@ export default defineComponent({
     font-size: 0.875rem;
 }
 
-/* Featured Article Specific */
-.article-card.featured .article-card__image {
-    aspect-ratio: 16/9;
-}
-
-.article-card.featured .article-title {
-    font-size: 1.5rem;
-}
-
-/* Mobile Responsive */
+/* Responsive */
 @media (max-width: 768px) {
     .blog-section {
         padding: 1.5rem 1rem;
@@ -639,25 +470,17 @@ export default defineComponent({
         margin-bottom: 2rem;
     }
     
-    .nav-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
+    .empty-state {
+        margin: 2rem auto;
+        padding: 2rem 1.5rem;
     }
     
-    .nav-actions {
-        width: 100%;
-        justify-content: space-between;
+    .empty-state__title {
+        font-size: 1.5rem;
     }
     
-    .category-tabs {
-        overflow-x: auto;
-        padding-bottom: 0.5rem;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .category-tab {
-        flex-shrink: 0;
+    .article-card.featured {
+        grid-template-columns: 1fr;
     }
 }
 </style>

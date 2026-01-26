@@ -16,6 +16,7 @@
         d="M14.1 27.2l7.1 7.2 16.7-16.8" 
       />
     </svg>
+    <p>{{ message }}</p>
   </div>
 </template>
 
@@ -24,6 +25,10 @@ defineProps({
   size: {
     type: [String, Number],
     default: 100
+  },
+  message:{
+    type: String,
+    default: 'Votre message a été envoyé avec succès !'
   }
 })
 </script>
@@ -31,6 +36,7 @@ defineProps({
 <style scoped>
 .success-icon {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -58,5 +64,11 @@ defineProps({
   100% {
     stroke-dashoffset: 0;
   }
+}
+
+.success-icon p{
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #ffffff;
 }
 </style>

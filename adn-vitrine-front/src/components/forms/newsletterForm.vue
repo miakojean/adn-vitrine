@@ -29,10 +29,10 @@
 
     <transition name="fade-transition">
       <div class="succes__container" v-if="isSuccess">
-        <succesCheck :size="80" />
-        <h3 class=" text-2xl font-bold">
-          Abonnement réussi ! Merci de vous être abonné à notre newsletter.
-        </h3>
+        <succesCheck 
+          :size="80"
+          message="Merci pour votre abonnement!"
+        />
       </div>
     </transition>
   </div>
@@ -44,6 +44,7 @@ import inputFamily from '../input/inputFamily.vue';
 import succesCheck from '../tools/succesCheck.vue';
 import { apiClient } from '../../services/api';
 import { reactive, ref } from 'vue';
+
 
 export default {
     name: 'NewsletterForm',

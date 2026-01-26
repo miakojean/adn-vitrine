@@ -58,7 +58,6 @@
                             <div class="member-info">
                                 <h3 class="member-name">{{ member.name }}</h3>
                                 <p class="member-role">{{ member.role }}</p>
-                                
                             </div>
                             
 
@@ -76,59 +75,6 @@
             </div>
         </div>
 
-        <!-- Modal de profil -->
-        <transition name="modal">
-            <div v-if="selectedMember" class="profile-modal" @click.self="closeModal">
-                <div class="modal-content">
-                    <button class="modal-close" @click="closeModal" aria-label="Fermer">
-                        <svg width="24" height="24" viewBox="0 0 24 24">
-                            <path d="M18 6L6 18M6 6L18 18" 
-                                  stroke="currentColor" 
-                                  stroke-width="2" 
-                                  stroke-linecap="round"/>
-                        </svg>
-                    </button>
-
-                    <div class="modal-body">
-                        <!-- Photo et infos basiques -->
-                        <div class="modal-header">
-                            <div class="modal-photo">
-                                <img :src="selectedMember.photo" :alt="selectedMember.name" />
-                            </div>
-                            <div class="modal-header-info">
-                                <h3>{{ selectedMember.name }}</h3>
-                                <p class="modal-role">{{ selectedMember.role }}</p>
-                                <p class="modal-department">{{ selectedMember.department }}</p>
-                            </div>
-                        </div>
-
-                        <!-- Informations détaillées -->
-                        <div class="modal-details">
-                            <div class="detail-section">
-                                <h4>Biographie</h4>
-                                <p>{{ selectedMember.fullBio }}</p>
-                            </div>
-
-                            <div class="detail-section">
-                                <h4>Contact</h4>
-                                <div class="contact-info">
-                                    <a :href="`mailto:${selectedMember.email}`" class="contact-item">
-                                        <span class="contact-icon">✉️</span>
-                                        <span>{{ selectedMember.email }}</span>
-                                    </a>
-                                    <div class="contact-item">
-                                        <span class="contact-icon">📱</span>
-                                        <span>{{ selectedMember.phone }}</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </transition>
     </section>
 </template>
 
@@ -138,8 +84,8 @@ import moreButton from '../button/moreButton.vue';
 import { useRouter } from 'vue-router';
 
 import pic1 from '../../assets/memberPic/PHOTO MME ANGE DESIRE NIOULE.jpg';
-import pic2 from '../../assets/memberPic/EMLICE KPANDJO.png';
-import pic3 from '../../assets/memberPic/PHOTO MME ANGE DESIRE NIOULE.jpg'
+import pic2 from '../../assets/memberPic/EMLICE_KPANDJO.png';
+import pic3 from '../../assets/memberPic/monsieur_roch.jpeg'
 
 // Types
 interface TeamMember {
@@ -151,12 +97,6 @@ interface TeamMember {
     bio: string;
     fullBio: string;
     tags: string[];
-    expertise: string[];
-    social: Array<{
-        platform: string;
-        url: string;
-        icon: string;
-    }>;
     email: string;
     phone: string;
     projects: number;
@@ -190,12 +130,6 @@ const teamMembers: TeamMember[] = [
         bio: 'Expert en architectures cloud et solutions évolutives.',
         fullBio: 'Avec plus de 10 ans d\'expérience dans le développement full-stack, Alexandre excelle dans la création d\'architectures cloud robustes et évolutives. Passionné par les technologies émergentes et les bonnes pratiques de développement.',
         tags: ['React', 'Node.js', 'AWS', 'TypeScript', 'Docker'],
-        expertise: ['Architecture Cloud', 'DevOps', 'Microservices', 'CI/CD'],
-        social: [
-            { platform: 'LinkedIn', url: '#', icon: '💼' },
-            { platform: 'GitHub', url: '#', icon: '💻' },
-            { platform: 'Twitter', url: '#', icon: '🐦' }
-        ],
         email: 'alexandre@entreprise.com',
         phone: '+33 1 23 45 67 89',
         projects: 42,
@@ -209,12 +143,6 @@ const teamMembers: TeamMember[] = [
         bio: 'Spécialiste en design d\'interface et expérience utilisateur.',
         fullBio: 'Sophie combine une expertise en design d\'interface avec une approche centrée sur l\'utilisateur. Elle dirige une équipe de designers talentueux pour créer des expériences digitales mémorables et fonctionnelles.',
         tags: ['UI/UX', 'Figma', 'Design System', 'Prototypage'],
-        expertise: ['Design Thinking', 'Recherche Utilisateur', 'Accessibilité', 'Animation'],
-        social: [
-            { platform: 'Behance', url: '#', icon: '🎨' },
-            { platform: 'Dribbble', url: '#', icon: '🏀' },
-            { platform: 'Instagram', url: '#', icon: '📸' }
-        ],
         email: 'sophie@entreprise.com',
         phone: '+33 1 23 45 67 90',
         projects: 38,
@@ -222,18 +150,12 @@ const teamMembers: TeamMember[] = [
     {
         id: 3,
         name: 'Rushdan BACHABI',
-        role: 'Directeur de l\'innovation',
+        role: 'CTO',
         department: 'Innovation',
         photo: pic3,
         bio: 'Passionné par Vue.js et les animations web modernes.',
         fullBio: 'Thomas est spécialisé dans le développement frontend avec Vue.js. Il adore créer des interfaces interactives et performantes, en mettant l\'accent sur les animations fluides et l\'expérience utilisateur.',
         tags: ['Vue.js', 'JavaScript', 'CSS3', 'Animation'],
-        expertise: ['Vue.js', 'Performance Web', 'Animations', 'Responsive Design'],
-        social: [
-            { platform: 'GitHub', url: '#', icon: '💻' },
-            { platform: 'CodePen', url: '#', icon: '✒️' },
-            { platform: 'Twitter', url: '#', icon: '🐦' }
-        ],
         email: 'thomas@entreprise.com',
         phone: '+33 1 23 45 67 91',
         projects: 27,
