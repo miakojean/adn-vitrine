@@ -12,7 +12,7 @@
                     <span class="title-line highlight">parlent d'eux-mêmes</span>
                 </h2>
                 <p class="section-subtitle">
-                    Plus de 10 ans d'excellence et d'engagement à vos côtés
+                    Plus de 9 ans d'excellence et d'engagement à vos côtés
                 </p>
             </div>
 

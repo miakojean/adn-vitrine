@@ -7,7 +7,7 @@
       <div class="header-content">
         <span class="badge">NOS SERVICES</span>
         <h2 class="title">
-          Garantissons ensemble votre <br />
+          Garantissons ensemble votre
           <span class="highlight">sécurité</span>
         </h2>
         <p class="subtitle">
@@ -27,7 +27,6 @@
             <div class="icon-box">
               <component :is="service.icon" />
             </div>
-            <span class="card-number">0{{ index + 1 }}</span>
           </div>
 
           <div class="card-body">
@@ -46,7 +45,7 @@
             </ul>
           </div>
 
-          <button class="card-btn">
+          <button class="card-btn" @click="() => router.push('/services')">
             Explore
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -60,6 +59,7 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import { h } from 'vue';
 
 /**
@@ -141,6 +141,9 @@ const services = [
     features: ["Audit de conformité", "Formation en droit du travail", "Gestion des ressources humaines"]
   }
 ];
+
+const router = useRouter();
+
 </script>
 
 <style scoped>
@@ -227,7 +230,7 @@ const services = [
 }
 
 .card {
-  background: rgba(30, 41, 59, 0.4);
+  background: rgba(41, 69, 114, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 24px;
   padding: 2.5rem;
@@ -261,17 +264,9 @@ const services = [
   justify-content: center;
 }
 
-.theme-purple .icon-box { background: rgba(139, 92, 246, 0.1); color: #a78bfa; }
-.theme-blue .icon-box { background: rgba(59, 130, 246, 0.1); color: #60a5fa; }
-.theme-pink .icon-box { background: rgba(236, 72, 153, 0.1); color: #f472b6; }
-
-.card-number {
-  font-family: monospace;
-  font-size: 1.5rem;
-  font-weight: 700;
-  opacity: 0.1;
-  color: #ffffff;
-}
+.theme-purple .icon-box { background: rgba(139, 92, 246, 0.1); color: #3b82f6; }
+.theme-blue .icon-box { background: rgba(59, 130, 246, 0.1); color: #f3f3f3; }
+.theme-pink .icon-box { background: rgba(236, 72, 153, 0.1); color: #14e642; }
 
 .card-title {
   font-size: 1.5rem;
@@ -320,7 +315,7 @@ const services = [
   cursor: pointer;
 }
 
-.theme-purple .card-btn, .theme-purple .features li svg { color: #a78bfa; }
-.theme-blue .card-btn, .theme-blue .features li svg { color: #60a5fa; }
-.theme-pink .card-btn, .theme-pink .features li svg { color: #f472b6; }
+.theme-purple .card-btn, .theme-purple .features li svg { color: #3b82f6; }
+.theme-blue .card-btn, .theme-blue .features li svg { color: #f3f3f3; }
+.theme-pink .card-btn, .theme-pink .features li svg { color: #14e642; }
 </style>

@@ -44,13 +44,14 @@
                 ></button>
             </div>
             
-            <!-- Boutons de navigation -->
-            <button class="carousel-btn prev" @click="prevSlide" aria-label="Slide précédent">
-                <span>&#10094;</span>
-            </button>
-            <button class="carousel-btn next" @click="nextSlide" aria-label="Slide suivant">
-                <span>&#10095;</span>
-            </button>
+            <!-- Boutons de navigation 
+                <button class="carousel-btn prev" @click="prevSlide" aria-label="Slide précédent">
+                    <span>&#10094;</span>
+                </button>
+                <button class="carousel-btn next" @click="nextSlide" aria-label="Slide suivant">
+                    <span>&#10095;</span>
+                </button>
+            -->
         </div>
     </section>
 </template>

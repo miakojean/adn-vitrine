@@ -15,17 +15,20 @@
         <div class="divider"></div>
       </div>
 
-      <div class="social-wrapper">
-        <a href="#" class="social-link" aria-label="LinkedIn">
-          <component :is="IconLinkedin" />
-        </a>
-        <a href="#" class="social-link" aria-label="Twitter">
-          <component :is="IconTwitter" />
-        </a>
-        <a href="#" class="social-link" aria-label="Facebook">
-          <component :is="IconFacebook" />
-        </a>
-      </div>
+      <!-- 
+        <div class="social-wrapper">
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <component :is="IconLinkedin" />
+          </a>
+          <a href="#" class="social-link" aria-label="Twitter">
+            <component :is="IconTwitter" />
+          </a>
+          <a href="#" class="social-link" aria-label="Facebook">
+            <component :is="IconFacebook" />
+          </a>
+        </div>
+      -->
+      
     </div>
   </article>
 </template>

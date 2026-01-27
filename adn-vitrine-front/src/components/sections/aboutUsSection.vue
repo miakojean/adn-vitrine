@@ -115,6 +115,8 @@ import pic6 from '../../assets/memberPic/IMG_9088.jpeg'
 import pic7 from '../../assets/memberPic/assi.jpeg'
 import pic8 from '../../assets/memberPic/EMLICE_KPANDJO.png'
 import pic9 from '../../assets/memberPic/1769441982210.png'
+import pic10 from '../../assets/memberPic/IMG_0165.jpg'
+import pic11 from '../../assets/memberPic/assita.jpeg'
 
 interface Member {
   id?: number;
@@ -154,11 +156,11 @@ export default defineComponent({
       { name: 'Rushdan BACHABI', pictureUrl: pic3, role: 'Directeur des Innovations', bio: '...' },
       { name: 'Tosseta DOH', pictureUrl: pic5, role: 'Legal Marketing Officer', bio: '...' },
       { name: 'Josué KOFFI', pictureUrl: pic6, role: 'Legal Sales Officer', bio: '...' },
-      { name: 'Nathanael NESSON', pictureUrl: pic1, role: 'Graphiste Designer', bio: '...' },
+      { name: 'Nathanael NESSON', pictureUrl: pic10, role: 'Graphiste Designer', bio: '...' },
       { name: 'Malaro DJANE', pictureUrl: pic4, role: 'Assistante Administrative et Executive', bio: '...' },
       { name: 'Grâce NIOULE', pictureUrl: pic2, role: 'Community Manager', bio: '...' },
       { name:'Guy-Uriel Sali ASSI', pictureUrl: pic7, role: 'Legal Ops', bio: '...' },
-      {name:'Assita TOURE', pictureUrl:pic1, role:'Contrat Manager', bio:"..."},
+      {name:'Assita TOURE', pictureUrl:pic11, role:'Contrat Manager', bio:"..."},
       { name: 'Jean Yves MIAKO', pictureUrl: pic9, role: 'Développeur Full Stack', bio: '...' },
     ];
 

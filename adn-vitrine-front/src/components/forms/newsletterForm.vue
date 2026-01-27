@@ -99,7 +99,7 @@ export default {
   flex-direction: column;
   justify-content: start;
   gap: 1rem;
-  padding: 2rem 1rem;
+  padding: 1rem 0;
   background: #1E293B;
   border-radius: 1rem;
 }

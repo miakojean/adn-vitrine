@@ -261,15 +261,15 @@ const services = [
   justify-content: center;
 }
 
-.theme-purple .icon-box { background: rgba(139, 92, 246, 0.1); color: #a78bfa; }
-.theme-blue .icon-box { background: rgba(59, 130, 246, 0.1); color: #60a5fa; }
-.theme-pink .icon-box { background: rgba(236, 72, 153, 0.1); color: #f472b6; }
+.theme-purple .icon-box { background: rgba(139, 92, 246, 0.1); color: #3b82f6; }
+.theme-blue .icon-box { background: rgba(59, 130, 246, 0.1); color: #f3f3f3; }
+.theme-pink .icon-box { background: rgba(236, 72, 153, 0.1); color: #14e642; }
 
 .card-number {
   font-family: monospace;
   font-size: 1.5rem;
   font-weight: 700;
-  opacity: 0.1;
+  opacity: 0.8;
   color: #ffffff;
 }
 
@@ -320,7 +320,7 @@ const services = [
   cursor: pointer;
 }
 
-.theme-purple .card-btn, .theme-purple .features li svg { color: #a78bfa; }
-.theme-blue .card-btn, .theme-blue .features li svg { color: #60a5fa; }
-.theme-pink .card-btn, .theme-pink .features li svg { color: #f472b6; }
+.theme-purple .card-btn, .theme-purple .features li svg { color: #3b82f6; }
+.theme-blue .card-btn, .theme-blue .features li svg { color: #f3f3f3; }
+.theme-pink .card-btn, .theme-pink .features li svg { color: #14e642; }
 </style>

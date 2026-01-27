@@ -5,10 +5,7 @@
                 <!-- Logo & Description -->
                 <div class="footer-brand">
                     <div class="brand-logo">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                            <rect width="32" height="32" rx="6" fill="#3B82F6"/>
-                            <path d="M10 16L14 20L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <img src="../../../public/LOGO ROND.png" alt="logo d'adn" class="footer__logo">
                         <span class="brand-name">ADN Consuting sas</span>
                     </div>
                     <p class="brand-description">
@@ -49,12 +46,12 @@
                 <div class="social-section">
                     <h3 class="social-title">Suivez-nous</h3>
                     <div class="social-links">
-                        <a href="https://twitter.com" class="social-link" target="_blank" aria-label="Twitter">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M22 4.01C21 4.5 20.02 4.69 19 5C17.879 3.735 16.217 3.665 15 4.5C13.879 5.335 13.5 6.5 14 8C10 7.5 7 5.5 4 2C4 2 1 8 8 11C6 12 4 12 2 11C2 16 6.5 19.5 12 19.5C17.5 19.5 21.5 15.5 21.5 10C21.5 9.5 21.5 9 21.4 8.5C22.338 7.735 23 6.5 23 5C23 4.5 22.5 4 22 4.01Z" fill="currentColor"/>
+                        <a href="https://www.facebook.com/cabinetADNconsulting/?locale=fr_FR" class="social-link" target="_blank" aria-label="Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 2H15C13.6739 2 12.4021 2.52678 11.4645 3.46447C10.5268 4.40215 10 5.67392 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.73478 14.1054 6.48043 14.2929 6.29289C14.4804 6.10536 14.7348 6 15 6H18V2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
-                        <a href="https://linkedin.com" class="social-link" target="_blank" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/company/adnconsulting/posts/?feedView=all" class="social-link" target="_blank" aria-label="LinkedIn">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                                 <path d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M6 9H2V21H6V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -142,6 +139,12 @@
     margin: 0;
 }
 
+.footer__logo{
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
 /* Links Section */
 .footer-links {
     display: grid;
@@ -213,12 +216,12 @@
     height: 36px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
-    color: var(--footer-text-muted);
+    color: #7cfe7c;
 }
 
 .social-link:hover {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--footer-primary);
+    color: #1bcb1b;
 }
 
 /* Divider */

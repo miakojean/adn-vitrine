@@ -184,7 +184,7 @@ export default defineComponent({
 }
 
 .nav--scrolled .nav__hamburger span {
-    background: #1a1a1a;
+    background: white;
 }
 
 .nav--menu-open .nav__hamburger span:nth-child(1) {
