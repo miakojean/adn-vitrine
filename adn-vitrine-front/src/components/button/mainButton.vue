@@ -22,12 +22,9 @@ export default {
     },
 
     setup() {
-        const handleCtaClick = () => {
-            return;
-        };
-
+        
         return {
-            handleCtaClick,
+            
         };
     },
 };

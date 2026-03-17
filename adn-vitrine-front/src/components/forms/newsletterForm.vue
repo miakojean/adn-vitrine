@@ -91,6 +91,7 @@ export default {
 
 <style scoped>
 /* --- Mobile first --- */
+
 .newsletter__form {
   margin-bottom: 2rem;
   width: 100%;
@@ -99,7 +100,7 @@ export default {
   flex-direction: column;
   justify-content: start;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 1rem;
   background: #1E293B;
   border-radius: 1rem;
 }

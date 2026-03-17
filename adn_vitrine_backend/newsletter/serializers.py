@@ -15,10 +15,25 @@ class NewsletterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Newsletter
         fields = [
-            'id', 'title', 'subject', 'content', 'status', 'created_by', 'created_by',
-            'created_by_username', 'created_at', 'updated_at', 'scheduled_at', 'sent_at'
+            'id', 
+            'title', 
+            'subject', 
+            'content', 
+            'status', 
+            'created_by', 
+            'created_by_username', 
+            'created_at', 
+            'updated_at', 
+            'scheduled_at', 
+            'sent_at'
         ]
-        read_only_fields = ['id', 'created_at', 'updated_at', 'sent_at', 'created_by_username']
+        read_only_fields = [
+            'id', 
+            'created_at', 
+            'updated_at', 
+            'sent_at', 
+            'created_by_username'
+        ]
 
 class CampaignSerializer(serializers.ModelSerializer):
     """Serializer pour les campagnes"""
@@ -31,5 +46,8 @@ class CampaignSerializer(serializers.ModelSerializer):
             'id', 'newsletter', 'newsletter_title', 'subscriber', 'subscriber_email',
             'sent_at', 'opened', 'opened_at', 'clicked', 'clicked_at'
         ]
-        read_only_fields = ['id', 'sent_at', 'opened_at', 'clicked_at', 'newsletter_title', 'subscriber_email']
+        read_only_fields = [
+            'id', 'sent_at', 'opened_at', 'clicked_at', 
+            'newsletter_title', 'subscriber_email'
+        ]
 

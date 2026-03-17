@@ -46,13 +46,7 @@
             </ul>
           </div>
 
-          <button class="card-btn">
-            Explore
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </button>
+          <moreButton label="nous contacter" @click="()=>router.push('/contact')"/>
         </div>
       </div>
     </div>
@@ -61,6 +55,8 @@
 
 <script setup lang="ts">
 import { h } from 'vue';
+import moreButton from '../button/moreButton.vue';
+import { useRouter } from 'vue-router';
 
 /**
  * Définition des icônes comme composants fonctionnels.
@@ -124,23 +120,34 @@ const services = [
     description: "Des solutions sur mesure pour lancer et sécuriser votre entreprise.",
     theme: "theme-purple",
     icon: IconCreation,
-    features: ["Constitution d'entreprises", "Dissolution d'entreprises", "Design System"]
+    features: [
+      "Constitution d'entreprises", "Dissolution d'entreprises", "Design System",
+      "Protection de la propriété intellectuelle", "Conseil juridique personnalisé"
+    ]
   },
   {
     title: "Suivi et accompagnement juridique",
     description: "Nous vous accompagnons dans la gestion de vos obligations juridiques.",
     theme: "theme-blue",
     icon: IconAccompagnement,
-    features: ["Rédaction de contrats", "Gestion des litiges", "Conformité réglementaire"]
+    features: [
+      "Rédaction de contrats", "Gestion des litiges", "Conformité réglementaire",
+      "Veille juridique", "Conseil stratégique",
+    ]
   },
   {
     title: "La conformité et ressources humaines",
     description: "Nous vous aidons à respecter les normes légales et à gérer vos ressources humaines.",
     theme: "theme-pink",
     icon: IconConformite,
-    features: ["Audit de conformité", "Formation en droit du travail", "Gestion des ressources humaines"]
+    features: [
+      "Audit de conformité", "Formation en droit du travail", "Gestion des ressources humaines",
+      "Mise en place de politiques internes", "Support en cas d'inspection"
+    ]
   }
 ];
+
+const router = useRouter();
 </script>
 
 <style scoped>

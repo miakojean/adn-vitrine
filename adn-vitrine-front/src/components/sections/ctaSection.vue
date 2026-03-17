@@ -2,7 +2,7 @@
     <section class="hero-carousel">
         <!-- Conteneur du carrousel -->
         <div class="carousel-container">
-            <!-- Slides avec images de fond -->
+
             <div 
                 v-for="(slide, index) in slides" 
                 :key="index"
@@ -29,7 +29,7 @@
                         </span>
                     </h2>
                     <p>{{ slide.description }}</p>
-                    <moreButton :label="slide.buttonText"/>
+                    <moreButton :label="slide.buttonText" @click="()=>router.push('/services')"/>
                 </div>
             </div>
             
@@ -58,6 +58,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, onUnmounted, watch, nextTick } from 'vue';
+import { useRouter } from 'vue-router';
 import heroImage_1 from '../../assets/pic/pexels-ekaterina-bolovtsova-6077381.jpg';
 import heroImage_2 from '../../assets/pic/pexels-matreding-12953639.jpg';
 import heroImage_3 from '../../assets/pic/pexels-roboseal34-35457179.jpg';
@@ -77,6 +78,7 @@ export default defineComponent({
         moreButton
     },
     setup() {
+        const router = useRouter();
         const slides = ref<Slide[]>([
             {
                 image: heroImage_2,
@@ -199,6 +201,7 @@ export default defineComponent({
         });
 
         return {
+            router,
             slides,
             currentSlide,
             titleRefs,

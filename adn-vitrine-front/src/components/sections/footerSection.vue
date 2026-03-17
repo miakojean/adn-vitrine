@@ -59,6 +59,9 @@
                             </svg>
                         </a>
                     </div>
+                    <div class="web__site">
+                        <a href="https://www.contratchap.com" class="footer-link" target="_blank" rel="noopener noreferrer">www.contratchap.com</a>
+                    </div>
                 </div>
             </div>
 

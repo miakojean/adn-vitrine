@@ -51,6 +51,7 @@ import moreButton from '../button/moreButton.vue';
 import { useRouter } from 'vue-router';
 
 // Imports (Inchangés)
+import partnerPic1 from '../../assets/partners/logo.png'
 import partnerPic2 from '../../assets/partners/PROPARCO_Logo_RVB-1.png';
 import partnerPic3 from '../../assets/partners/giz-logo-01.jpg';
 import partnerPic4 from '../../assets/partners/OIP (4).webp'
@@ -65,13 +66,13 @@ interface Partner { id: number; name: string; logo: string; category: string; }
 const router = useRouter();
 const partnersData: Partner[] = [
     { id: 1, name: 'millenium', category: 'AI', logo: partnerPic7 },
+    { id: 2, name: 'Contratchap', category: 'General', logo: partnerPic1 },
     { id: 3, name: 'giz', category: 'Search', logo: partnerPic3 },
     { id: 4, name: 'oip', category: 'Networking', logo: partnerPic4 },
     { id: 5, name: 'Intel', category: 'Hardware', logo: partnerPic5 },
     { id: 6, name: 'Meta', category: 'Social', logo: partnerPic6 },
-    { id: 7, name: 'Asus', category: 'Hardware', logo: partnerPic7 },
     { id: 8, name: 'Discord', category: 'Community', logo: partnerPic8 },
-    { id: 2, name: 'proparco', category: 'Finance', logo: partnerPic2 },
+    { id: 9, name: 'proparco', category: 'Finance', logo: partnerPic2 },
     
 ];
 
@@ -183,7 +184,7 @@ onUnmounted(() => {
 }
 
 .highlight {
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    background: linear-gradient(135deg, #3b82f6 0%, #304be1 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

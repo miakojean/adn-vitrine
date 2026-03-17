@@ -16,7 +16,9 @@
     </div>
 
     <div class="cta__button">
-        <mainButton label="Besoin d'un contrat"/>
+        <mainButton label="Besoin d'un contrat"
+            @click="navigateToExternal('https://contratchap.com')"
+        />
     </div>
     
     <!-- Menu mobile -->
@@ -36,7 +38,10 @@
             <li><router-link to="/newsletter" class="nav__link" active-class="active" @click="closeMenu">Newsletter</router-link></li>
         </ul>
         <div class="nav__cta">
-            <mainButton @click="navigateToExternal('contratchap.com')"/>
+            <mainButton 
+                @click ="() => navigateToExternal('https://contratchap.com')"
+                label="besoin d'un contrat"
+            />
         </div>
     </div>
     
