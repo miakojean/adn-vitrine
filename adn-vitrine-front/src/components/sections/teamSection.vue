@@ -83,9 +83,9 @@ import { ref, computed, onMounted, onUnmounted, reactive } from 'vue';
 import moreButton from '../button/moreButton.vue';
 import { useRouter } from 'vue-router';
 
-import pic1 from '../../assets/memberPic/PHOTO MME ANGE DESIRE NIOULE.jpg';
-import pic2 from '../../assets/memberPic/EMLICE_KPANDJO.png';
-import pic3 from '../../assets/memberPic/monsieur_roch.jpeg'
+import mme_nioule from '../../assets/member/MME NIOULE.jpg';
+import mme_coffi from '../../assets/member/MME EMLICE.jpg'
+import m_rush from '../../assets/member/MONSIEUR RUSH.png'
 
 // Types
 interface TeamMember {
@@ -126,7 +126,7 @@ const teamMembers: TeamMember[] = [
         name: 'Ange Désirée NIOULE',
         role: 'Founder & CEO',
         department: 'Développement',
-        photo: pic1,
+        photo: mme_nioule,
         bio: 'Expert en architectures cloud et solutions évolutives.',
         fullBio: 'Avec plus de 10 ans d\'expérience dans le développement full-stack, Alexandre excelle dans la création d\'architectures cloud robustes et évolutives. Passionné par les technologies émergentes et les bonnes pratiques de développement.',
         tags: ['React', 'Node.js', 'AWS', 'TypeScript', 'Docker'],
@@ -139,7 +139,7 @@ const teamMembers: TeamMember[] = [
         name: 'Emlice PKANDJO',
         role: 'Directrice juridique',
         department: 'Juridique',
-        photo: pic2,
+        photo: mme_coffi,
         bio: 'Spécialiste en design d\'interface et expérience utilisateur.',
         fullBio: 'Sophie combine une expertise en design d\'interface avec une approche centrée sur l\'utilisateur. Elle dirige une équipe de designers talentueux pour créer des expériences digitales mémorables et fonctionnelles.',
         tags: ['UI/UX', 'Figma', 'Design System', 'Prototypage'],
@@ -152,7 +152,7 @@ const teamMembers: TeamMember[] = [
         name: 'Rushdan BACHABI',
         role: 'CTO',
         department: 'Innovation',
-        photo: pic3,
+        photo: m_rush,
         bio: 'Passionné par Vue.js et les animations web modernes.',
         fullBio: 'Thomas est spécialisé dans le développement frontend avec Vue.js. Il adore créer des interfaces interactives et performantes, en mettant l\'accent sur les animations fluides et l\'expérience utilisateur.',
         tags: ['Vue.js', 'JavaScript', 'CSS3', 'Animation'],

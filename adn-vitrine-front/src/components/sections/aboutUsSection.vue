@@ -103,20 +103,19 @@ import { useRouter } from 'vue-router';
 import mainButton from '../button/mainButton.vue';
 import divider from '../tools/divider.vue';
 import teamCards from '../cards/teamCards.vue';
-import patnerSection from './patnerSection.vue';
 
 // Pictures import
-import pic1 from '../../assets/memberPic/PHOTO MME ANGE DESIRE NIOULE.jpg'
-import pic2 from '../../assets/memberPic/grâce_nioule.jpeg'
-import pic3 from '../../assets/memberPic/monsieur_roch.jpeg'
-import pic4 from '../../assets/memberPic/malaro.jpeg'
-import pic5 from '../../assets/memberPic/tosseta.jpeg'
-import pic6 from '../../assets/memberPic/IMG_9088.jpeg'
-import pic7 from '../../assets/memberPic/assi.jpeg'
-import pic8 from '../../assets/memberPic/EMLICE_KPANDJO.png'
-import pic9 from '../../assets/memberPic/1769441982210.png'
-import pic10 from '../../assets/memberPic/IMG_0165.jpg'
-import pic11 from '../../assets/memberPic/assita.jpeg'
+import madame from '../../assets/member/MME NIOULE.jpg'
+import mme_coffi from '../../assets/member/MME EMLICE.jpg'
+import m_rush from '../../assets/member/MONSIEUR RUSH.png'
+import tosseta from '../../assets/member/TOSSE.jpg'
+import josue from '../../assets/member/JOSUE.jpg'
+import nathan from '../../assets/member/LAYNE.jpg'
+import malaro from '../../assets/member/MALARO.jpg'
+import grace from '../../assets/member/GRACE.jpg'
+import assi from '../../assets/member/assi.jpg'
+import assita from '../../assets/member/ASSITA.jpg'
+import jy from '../../assets/member/JY.jpg'
 
 interface Member {
   id?: number;
@@ -151,17 +150,17 @@ export default defineComponent({
     ];
 
     const teamMembers: Member[] = [
-      { name: 'Ange Désiré NIOULE', pictureUrl: pic1, role: 'Fondatrice & CEO', bio: '...' },
-      { name: 'Emlice KPANDJO', pictureUrl: pic8, role: 'Directrice Juridique', bio: '...' },
-      { name: 'Rushdan BACHABI', pictureUrl: pic3, role: 'Directeur des Innovations', bio: '...' },
-      { name: 'Tosseta DOH', pictureUrl: pic5, role: 'Legal Marketing Officer', bio: '...' },
-      { name: 'Josué KOFFI', pictureUrl: pic6, role: 'Legal Sales Officer', bio: '...' },
-      { name: 'Nathanael NESSON', pictureUrl: pic10, role: 'Graphiste Designer', bio: '...' },
-      { name: 'Malaro DJANE', pictureUrl: pic4, role: 'Assistante Administrative et Executive', bio: '...' },
-      { name: 'Grâce NIOULE', pictureUrl: pic2, role: 'Community Manager', bio: '...' },
-      { name:'Guy-Uriel Sali ASSI', pictureUrl: pic7, role: 'Legal Ops', bio: '...' },
-      {name:'Assita TOURE', pictureUrl:pic11, role:'Contrat Manager', bio:"..."},
-      { name: 'Jean Yves MIAKO', pictureUrl: pic9, role: 'Développeur Full Stack', bio: '...' },
+      { name: 'Ange Désiré NIOULE', pictureUrl: madame, role: 'Fondatrice & CEO', bio: '...' },
+      { name: 'Emlice KPANDJO', pictureUrl: mme_coffi, role: 'Directrice Juridique', bio: '...' },
+      { name: 'Rushdan BACHABI', pictureUrl: m_rush, role: 'Directeur des Innovations', bio: '...' },
+      { name: 'Tosseta DOH', pictureUrl: tosseta, role: 'Legal Marketing Officer', bio: '...' },
+      { name: 'Josué KOFFI', pictureUrl: josue, role: 'Legal Sales Officer', bio: '...' },
+      { name: 'Nathanael NESSON', pictureUrl: nathan, role: 'Graphiste Designer', bio: '...' },
+      { name: 'Malaro DJANE', pictureUrl: malaro, role: 'Assistante Administrative et Executive', bio: '...' },
+      { name: 'Grâce NIOULE', pictureUrl: grace, role: 'Community Manager', bio: '...' },
+      { name:'Guy-Uriel Sali ASSI', pictureUrl: assi, role: 'Legal Ops', bio: '...' },
+      {name:'Assita TOURE', pictureUrl:assita, role:'Contrat Manager', bio:"..."},
+      { name: 'Jean Yves MIAKO', pictureUrl: jy, role: 'Développeur Full Stack', bio: '...' },
     ];
 
     // Calculs pour le carrousel

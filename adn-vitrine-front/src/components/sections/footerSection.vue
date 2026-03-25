@@ -5,7 +5,7 @@
                 <!-- Logo & Description -->
                 <div class="footer-brand">
                     <div class="brand-logo">
-                        <img src="../../../public/LOGO ROND.png" alt="logo d'adn" class="footer__logo">
+                        <img src="/LOGO ROND.png" alt="logo d'adn" class="footer__logo">
                         <span class="brand-name">ADN Consuting sas</span>
                     </div>
                     <p class="brand-description">
