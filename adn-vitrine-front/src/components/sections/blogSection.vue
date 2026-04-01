@@ -147,15 +147,7 @@ const displayedArticles = computed(() =>
     articles.value.slice(0, currentPage.value * pageSize)
 )
 
-const hasMoreArticles = computed(() => 
-    displayedArticles.value.length < articles.value.length
-)
 
-const loadMoreArticles = () => {
-    if (hasMoreArticles.value) {
-        currentPage.value++
-    }
-}
 </script>
 
 <style scoped>
@@ -202,7 +194,7 @@ const loadMoreArticles = () => {
     line-height: 1.1;
     margin-bottom: 1.5rem;
     background: linear-gradient(to right, #fff, var(--color-primary));
-    -webkit-background-clip: text;
+
     -webkit-text-fill-color: transparent;
 }
 

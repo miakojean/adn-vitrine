@@ -36,7 +36,7 @@
             <!-- Indicateurs de slides -->
             <div class="carousel-indicators">
                 <button
-                    v-for="(slide, index) in slides"
+                    v-for="(_, index) in slides"
                     :key="index"
                     :class="['indicator', { active: currentSlide === index }]"
                     @click="goToSlide(index)"

@@ -102,13 +102,6 @@ interface TeamMember {
     projects: number;
 }
 
-interface Category {
-    id: string;
-    name: string;
-    icon: string;
-    count: number;
-}
-
 // Références
 const teamSection = ref<HTMLElement | null>(null);
 const showContent = ref(false);
@@ -168,9 +161,6 @@ const filteredMembers = computed(() => {
     if (activeCategory.value === 'all') {
         return teamMembers;
     }
-    return teamMembers.filter(member => 
-        member.category.includes(activeCategory.value)
-    );
 });
 
 const hoverCard = (memberId: number) => {
@@ -195,11 +185,6 @@ const openModal = (member: TeamMember) => {
 const closeModal = () => {
     selectedMember.value = null;
     document.body.style.overflow = '';
-};
-
-const truncateText = (text: string, maxLength: number) => {
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength) + '...';
 };
 
 const imageLoad = (memberId: number) => {

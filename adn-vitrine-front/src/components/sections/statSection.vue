@@ -106,7 +106,7 @@ const stats = reactive<AnimatedStat[]>([
 const animateNumber = (stat: AnimatedStat, delay: number) => {
     const duration = 2000;
     let startTime = 0;
-    let animationFrame = 0;
+    // On supprime la déclaration de animationFrame ici
 
     const animate = (timestamp: number) => {
         if (!startTime) startTime = timestamp;
@@ -117,14 +117,15 @@ const animateNumber = (stat: AnimatedStat, delay: number) => {
         stat.displayValue = Math.floor(easedProgress * stat.value);
         
         if (progress < 1) {
-            animationFrame = requestAnimationFrame(animate);
+            // On appelle la fonction sans stocker le résultat
+            requestAnimationFrame(animate);
         } else {
             stat.displayValue = stat.value;
         }
     };
 
     setTimeout(() => {
-        animationFrame = requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
     }, delay);
 };
 
