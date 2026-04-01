@@ -108,7 +108,7 @@ import teamCards from '../cards/teamCards.vue';
 import madame from '../../assets/member/MME NIOULE.jpg'
 import mme_coffi from '../../assets/member/MME EMLICE.jpg'
 import m_rush from '../../assets/member/MONSIEUR RUSH.png'
-import tosseta from '../../assets/member/TOSSE.jpg'
+import tosseta from '../../assets/member/Toss.png'
 import josue from '../../assets/member/JOSUE.jpg'
 import nathan from '../../assets/member/LAYNE.jpg'
 import malaro from '../../assets/member/MALARO.jpg'
