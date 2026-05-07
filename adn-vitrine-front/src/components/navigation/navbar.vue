@@ -1,7 +1,7 @@
 <template>
 <nav class="main__nav" :class="{ 'nav--scrolled': isScrolled, 'nav--menu-open': isMenuOpen }">
     <div class="nav__logo">
-        <h3>ADN Consulting</h3>
+        <img src="/LOGO ADN copie.webp" alt="">
     </div>
     
     <!-- Menu desktop -->

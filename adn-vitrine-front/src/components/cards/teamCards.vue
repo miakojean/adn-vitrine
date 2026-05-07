@@ -3,7 +3,7 @@
     <div class="card-glow"></div>
 
     <div class="image-wrapper">
-      <img :src="picUrl" :alt="name" class="profile-pic" loading="lazy">
+      <img :src="picUrl" :alt="name" class="profile-pic" loading="lazy" width="320" height="auto">
       <div class="image-overlay"></div>
       
       <div class="role-badge">{{ role }}</div>

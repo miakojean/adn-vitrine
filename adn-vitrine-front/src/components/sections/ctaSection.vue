@@ -82,7 +82,7 @@ export default defineComponent({
         const slides = ref<Slide[]>([
             {
                 image: heroImage_2,
-                title: 'Bienvenue chez ADN Consulting SAS.',
+                title: 'Bienvenue chez ADN Consulting.',
                 description: 'un cabinet juridique innovant dédié à accompagner les PME, startups et entrepreneurs indépendants.',
                 buttonText: 'Découvrir'
             },
