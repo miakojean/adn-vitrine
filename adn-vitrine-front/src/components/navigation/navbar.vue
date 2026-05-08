@@ -10,8 +10,7 @@
             <li><router-link to="/" class="nav__link" exact-active-class="active">Accueil</router-link></li>
             <li><router-link to="/about" class="nav__link" active-class="active">À propos</router-link></li>
             <li><router-link to="/services" class="nav__link" active-class="active">Services</router-link></li>
-            <li><router-link to="/blog" class="nav__link" active-class="active">Blog</router-link></li>
-            <li><router-link to="/newsletter" class="nav__link" active-class="active">Newsletter</router-link></li>
+            <li><router-link to="/blog" class="nav__link" active-class="active">Newsletter</router-link></li>
         </ul>
     </div>
 
@@ -160,6 +159,12 @@ export default defineComponent({
  
 .nav--scrolled .nav__logo h3 {
     color: #eee;
+}
+
+.nav__logo img{
+    height: 80px;
+    width: 80px;
+    cursor: pointer;
 }
 
 /* Menu desktop - caché sur mobile */

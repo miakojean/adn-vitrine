@@ -266,7 +266,7 @@ const router = useRouter();
 
 .theme-purple .icon-box { background: rgba(139, 92, 246, 0.1); color: #3b82f6; }
 .theme-blue .icon-box { background: rgba(59, 130, 246, 0.1); color: #f3f3f3; }
-.theme-pink .icon-box { background: rgba(236, 72, 153, 0.1); color: #14e642; }
+.theme-pink .icon-box { background: rgba(93, 123, 243, 0.1); color: #14e642; }
 
 .card-title {
   font-size: 1.5rem;

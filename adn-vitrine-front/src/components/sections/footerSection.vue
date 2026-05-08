@@ -219,12 +219,12 @@
     height: 36px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
-    color: #7cfe7c;
+    color: #3b82f6;
 }
 
 .social-link:hover {
     background: rgba(255, 255, 255, 0.1);
-    color: #1bcb1b;
+    color: #3b82f6;
 }
 
 /* Divider */

@@ -329,13 +329,17 @@ onUnmounted(() => {
 .stat-number {
     font-size: 5rem;
     font-weight: 900;
-    background: var(--primary-blue);
+    background: white;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 1.5rem;
     line-height: 1;
     letter-spacing: -0.02em;
+}
+
+.stat-number span{
+    color:#f8fafc;
 }
 
 .stat-number .plus {
@@ -352,13 +356,13 @@ onUnmounted(() => {
 .stat-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #f8fafc;
+    color: white;
     margin-bottom: 0.75rem;
 }
 
 .stat-description {
     font-size: 1rem;
-    color: #94a3b8;
+    color: #3b82f6;
     margin-bottom: 1.5rem;
     line-height: 1.6;
 }
@@ -368,7 +372,7 @@ onUnmounted(() => {
     display: inline-block;
     padding: 0.5rem 1rem;
     background: rgba(59, 130, 246, 0.1);
-    color: #3b82f6;
+    color:#3b82f6;
     font-size: 0.875rem;
     font-weight: 600;
     border-radius: 12px;
